@@ -8,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class connectionButton implements Initializable{
+public class ConnectionButton implements Initializable{
 
     @FXML
     Button bOk;
