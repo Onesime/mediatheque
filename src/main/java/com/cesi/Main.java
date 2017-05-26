@@ -28,7 +28,7 @@ public class Main extends Application {
             loader.setLocation(Main.class.getResource("/BoutonCo.fxml"));
             AnchorPane BoutonCo = loader.load();
 
-            loader.setController(new Toto());
+            //loader.setController(new Toto());
 
             Scene scene = new Scene(BoutonCo);
             primaryStage.setScene(scene);

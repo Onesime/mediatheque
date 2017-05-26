@@ -16,7 +16,7 @@ public class ConnectionButton implements Initializable{
     Label lbTest;
 
     private void handleButtonAction(ActionEvent event) {
-        Connect.connect();
+        //Connect.connect();
     }
 
     @Override
