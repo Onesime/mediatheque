@@ -11,7 +11,7 @@ public class Config {
     }
 
     public static String getPwd(){
-        return "Mandji135";
+        return "<wDx90*%:!";
     }
 
 

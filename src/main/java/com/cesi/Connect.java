@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Connect {
 
-    public static void main(String[] argv) {
+    public static void connect() {
 
         System.out.println("-------- MySQL JDBC Connection Testing ------------");
 

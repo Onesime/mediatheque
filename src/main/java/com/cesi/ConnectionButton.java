@@ -25,5 +25,5 @@ public class ConnectionButton implements Initializable{
         bOk.setOnAction(this::handleButtonAction);
     }
 
-
 }
+
