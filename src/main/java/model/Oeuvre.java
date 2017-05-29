@@ -8,7 +8,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Oeuvres {
+public class Oeuvre {
 
     private final StringProperty title;
     private final StringProperty cat;
