@@ -1,4 +1,4 @@
-package com.cesi;
+package model;
 
 public class Config {
 

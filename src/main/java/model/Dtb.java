@@ -1,5 +1,5 @@
 
-package com.cesi;
+package model;
 
 import java.sql.DriverManager;
 import java.sql.Connection;
