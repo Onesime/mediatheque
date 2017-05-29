@@ -17,7 +17,7 @@ public class Oeuvre {
     private final StringProperty genre;
 
 
-    public Oeuvres(String title, String cat, String author, String genre) {
+    public Oeuvre(String title, String cat, String author, String genre) {
         this.title = new SimpleStringProperty(title);
         this.cat = new SimpleStringProperty(cat);
         this.author = new SimpleStringProperty(author);
