@@ -37,11 +37,11 @@ public class DAOOeuvre {
 			Oeuvre oeuvre = new Oeuvre();
 			while (rs.next()) {
 				System.out.println(rs.getInt("id"));
-				System.out.println(rs.getInt("titre"));
-				System.out.println(rs.getInt("date_acquisition"));
-				System.out.println(rs.getInt("date_sortie"));
+				System.out.println(rs.getString("titre"));
+				System.out.println(rs.getString("date_acquisition"));
+				System.out.println(rs.getString("date_sortie"));
 				System.out.println(rs.getInt("note"));
-				System.out.println(rs.getInt("comment"));
+				System.out.println(rs.getString("comment"));
 				/*
 				oeuvre.setId(rs.getInt("id"));
 				oeuvre.setTitre(rs.getString("titre"));
