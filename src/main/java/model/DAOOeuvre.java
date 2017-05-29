@@ -15,7 +15,9 @@ import javafx.beans.property.StringProperty;
 
 public class DAOOeuvre {
 
-	static String selectSQL = "SELECT * FROM oeuvre WHERE id=?";
+	static String selectSQL = "SELECT oeuvre.*, auteur.name, genre.name, langue.name FROM oeuvre INNER JOIN auteur ON oeuvre.auteur_id=auteur.id " +
+			"INNER JOIN genre ON oeuvre.genre_id=genre.id " + "INNER JOIN langue ON oeuvre.langue_id=langue.id " +
+			"WHERE oeuvre.id=?";
 
 	public static void main(String[] argv) {
 		/// get
@@ -32,7 +34,8 @@ public class DAOOeuvre {
 		/// prepare + set
 		try	{
 			PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setInt(1, 4);
+
+			preparedStatement.setInt(1, 8);
 
 			/// result
 			ResultSet rs = preparedStatement.executeQuery();
@@ -46,6 +49,15 @@ public class DAOOeuvre {
 				System.out.println(rs.getString("date_sortie"));
 				System.out.println(rs.getInt("note"));
 				System.out.println(rs.getString("comment"));
+				System.out.println(rs.getInt("auteur_id"));
+				System.out.println(rs.getInt("genre_id"));
+				System.out.println(rs.getInt("langue_id"));
+				System.out.println(rs.getInt("plateforme_id"));
+				System.out.println(rs.getInt("origine_id"));
+				System.out.println(rs.getInt("categorie_id"));
+				System.out.println(rs.getString("auteur.name"));
+				System.out.println(rs.getString("genre.name"));
+				System.out.println(rs.getString("langue.name"));
 				/*
 				oeuvre.setId(rs.getInt("id"));
 				oeuvre.setTitre(rs.getString("titre"));
