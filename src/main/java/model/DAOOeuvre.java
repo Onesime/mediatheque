@@ -19,11 +19,11 @@ public class DAOOeuvre {
 
 	public static void main(String[] argv) {
 		/// get
-		Oeuvre Oeuvre1 = DAOOeuvre.getOeuvre(1);
+		int Oeuvre1 = DAOOeuvre.getOeuvre(1);
 
 	}
 
-	public static Oeuvre getOeuvre(int id)
+	public static int getOeuvre(int id)
 	{
 		/// conn
 		Connection connection = Dtb.getConnection();
@@ -38,7 +38,7 @@ public class DAOOeuvre {
 			ResultSet rs = preparedStatement.executeQuery();
 			System.out.println("ok");
 
-			Oeuvre oeuvre = new Oeuvre();
+			//Oeuvre oeuvre = new Oeuvre();
 			while (rs.next()) {
 				System.out.println(rs.getInt("id"));
 				System.out.println(rs.getString("titre"));
@@ -59,13 +59,13 @@ public class DAOOeuvre {
 				System.out.println("note : " + oeuvre.getNote());
 				*/
 			}
-			return oeuvre;
+			return 1;
 		} catch (SQLException ex) {
 			System.out.println("bug");
 			ex.printStackTrace();
 		}
 
-		return new Oeuvre();
+		return 1;
 	}
 
 }

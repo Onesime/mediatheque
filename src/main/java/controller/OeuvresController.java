@@ -12,28 +12,28 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import model.Oeuvres;
+import model.Oeuvre;
 import java.util.Date;
 
 public class OeuvresController {
     @FXML
-    private TableView<Oeuvres> oeuvresTable;
+    private TableView<Oeuvre> oeuvresTable;
     @FXML
-    private TableColumn<Oeuvres, String> titleColumn;
+    private TableColumn<Oeuvre, String> titleColumn;
     @FXML
-    private TableColumn<Oeuvres, String> catColumn;
+    private TableColumn<Oeuvre, String> catColumn;
     /*@FXML
-    private TableColumn<Oeuvres, DateCell> acqDateColumn;
+    private TableColumn<Oeuvre, DateCell> acqDateColumn;
     @FXML
-    private TableColumn<Oeuvres, DateCell> addDateColumn;*/
+    private TableColumn<Oeuvre, DateCell> addDateColumn;*/
     @FXML
-    private TableColumn<Oeuvres, String> authorColumn;
+    private TableColumn<Oeuvre, String> authorColumn;
     @FXML
-    private TableColumn<Oeuvres, String> genreColumn;
+    private TableColumn<Oeuvre, String> genreColumn;
 
     private int iNumber = 1;
 
-    final ObservableList<Oeuvres> data = FXCollections.observableArrayList();
+    final ObservableList<Oeuvre> data = FXCollections.observableArrayList();
 
     public void initialize(URL location, ResourceBundle resources) {
         titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());

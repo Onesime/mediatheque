@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import model.Oeuvres;
+import model.Oeuvre;
 
 import java.io.IOException;
 
@@ -20,14 +20,14 @@ public class Main extends Application {
     /**
      * Définition des Table Data dans une ObservableList.
      */
-    final ObservableList<Oeuvres> oeuvresData = FXCollections.observableArrayList(
-        new Oeuvres("Cornelia", "Movie", "truc", "sf"),
-        new Oeuvres("Werner", "Video Game", "chose", "fantasy"),
-        new Oeuvres("Anna", "Book", "glup", "thriller" ),
-        new Oeuvres("Martin", "Music", "fiofjf", "rock")
+    final ObservableList<Oeuvre> oeuvresData = FXCollections.observableArrayList(
+        new Oeuvre("Cornelia", "Movie", "truc", "sf"),
+        new Oeuvre("Werner", "Video Game", "chose", "fantasy"),
+        new Oeuvre("Anna", "Book", "glup", "thriller" ),
+        new Oeuvre("Martin", "Music", "fiofjf", "rock")
     );
 
-    public ObservableList<Oeuvres> getOeuvresData() {
+    public ObservableList<Oeuvre> getOeuvresData() {
         return oeuvresData;
     }
 
@@ -47,7 +47,7 @@ public class Main extends Application {
 
             //loader.setController(new LogButton());
 
-            oeuvresData.add(new Oeuvres("Werner", "Video Game", "chose", "fantasy"));
+            oeuvresData.add(new Oeuvre("Werner", "Video Game", "chose", "fantasy"));
 
             OeuvresController controller = loader.getController();
             controller.setMainApp(this);
@@ -71,6 +71,10 @@ public class Main extends Application {
 
             //loader.setController(new Toto());
             loader.setController(new ConnectionButton());
+<<<<<<< HEAD
+=======
+
+>>>>>>> b46a2db37a09e7dc6381c75ce363c07e1b6cded0
 
             Scene scene = new Scene(BoutonCo);
             primaryStage.setScene(scene);

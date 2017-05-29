@@ -3,5 +3,8 @@
 /home/deleham/Partager/Cesi/Projets/Mediatheque/mediatheque/src/main/java/com/cesi/ConnectionButton.java
 /home/deleham/Partager/Cesi/Projets/Mediatheque/mediatheque/src/main/java/com/cesi/Config.java
 /home/deleham/Partager/Cesi/Projets/Mediatheque/mediatheque/src/main/java/com/cesi/LogButton.java
+/home/deleham/Partager/Cesi/Projets/Mediatheque/mediatheque/src/main/java/model/Oeuvres.java
 /home/deleham/Partager/Cesi/Projets/Mediatheque/mediatheque/src/main/java/com/cesi/Connect.java
+/home/deleham/Partager/Cesi/Projets/Mediatheque/mediatheque/src/main/java/model/DAOOeuvres.java
 /home/deleham/Partager/Cesi/Projets/Mediatheque/mediatheque/src/main/java/com/cesi/Dtb.java
+/home/deleham/Partager/Cesi/Projets/Mediatheque/mediatheque/src/main/java/controller/OeuvresController.java
