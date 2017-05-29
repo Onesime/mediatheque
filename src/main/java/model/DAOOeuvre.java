@@ -9,7 +9,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class Oeuvres {
+public class DAOOeuvre {
 
 	static String selectSQL = "SELECT * FROM oeuvre WHERE id=?";
 
@@ -36,7 +36,13 @@ public class Oeuvres {
 
 			Oeuvre oeuvre = new Oeuvre();
 			while (rs.next()) {
-				System.out.println("toto");
+				System.out.println(rs.getInt("id"));
+				System.out.println(rs.getInt("titre"));
+				System.out.println(rs.getInt("date_acquisition"));
+				System.out.println(rs.getInt("date_sortie"));
+				System.out.println(rs.getInt("note"));
+				System.out.println(rs.getInt("comment"));
+				/*
 				oeuvre.setId(rs.getInt("id"));
 				oeuvre.setTitre(rs.getString("titre"));
 				// datet
@@ -45,8 +51,9 @@ public class Oeuvres {
 				oeuvre.setComment(rs.getString("comment"));
 
 				System.out.println("id : " + oeuvre.getId());
-				System.out.println("titre : " + oeuvre.getTitre());
+				System.out.println("titre : " + oeuvre.getTitle());
 				System.out.println("note : " + oeuvre.getNote());
+				*/
 			}
 			return oeuvre;
 		} catch (SQLException ex) {
