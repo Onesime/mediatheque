@@ -3,10 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.util.Date;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 public class Oeuvre {
 
@@ -16,9 +13,7 @@ public class Oeuvre {
     private final StringProperty author;
     private final StringProperty genre;
 
-		public Oeuvre() {
-  
-		}
+
     public Oeuvre(String title, String cat, String author, String genre) {
         this.title = new SimpleStringProperty(title);
         this.cat = new SimpleStringProperty(cat);
@@ -27,7 +22,7 @@ public class Oeuvre {
     }
 
 		
-		public String getId() {
+		public int getId() {
         return id.get();
     }
 
