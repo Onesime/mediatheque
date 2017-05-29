@@ -29,7 +29,7 @@ INSERT INTO oeuvre (titre, note, date_acquisition, date_sortie, comment, auteur_
 INSERT INTO oeuvre (titre, note, date_acquisition, date_sortie, comment, auteur_id, genre_id, langue_id, origine_id, categorie_id) VALUES ("Requiem",1,now(),now(),"super bien", 3, 1, 1, 1, 3);
 
 INSERT INTO morceau (name, duree, oeuvre_id) VALUES ("toto","12:00:00",4);
-INSERT INTO morceau (name, duree, oeuvre_id) VALUES ("toto","12:00:00" ,4);
+INSERT INTO morceau (name, duree, oeuvre_id) VALUES ("toto","12:00:00",4);
 
 
 
