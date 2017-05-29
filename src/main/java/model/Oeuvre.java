@@ -10,6 +10,7 @@ import javafx.beans.property.StringProperty;
 
 public class Oeuvre {
 
+		private IntegerProperty id;
     private final StringProperty title;
     private final StringProperty cat;
     private final StringProperty author;
@@ -23,6 +24,21 @@ public class Oeuvre {
         this.genre = new SimpleStringProperty(genre);
     }
 
+		
+		public String getId() {
+        return id.get();
+    }
+
+    public void setId(int id) {
+        this.id.set(id);
+    }
+
+    public IntegerProperty idProperty() {
+        return id;
+    }
+
+
+
     public String getTitle() {
         return title.get();
     }
@@ -32,8 +48,10 @@ public class Oeuvre {
     }
 
     public StringProperty titleProperty() {
-        return genre;
+        return title;
     }
+
+		
 
     public String getCat() {
         return cat.get();
@@ -48,6 +66,7 @@ public class Oeuvre {
     }
 
 
+
     public String getAuthor() {
         return author.get();
     }
@@ -59,6 +78,8 @@ public class Oeuvre {
     public StringProperty authorProperty() {
         return author;
     }
+
+	
 
     public String getGenre() {
         return genre.get();
