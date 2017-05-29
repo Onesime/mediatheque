@@ -71,10 +71,6 @@ public class Main extends Application {
 
             //loader.setController(new Toto());
             loader.setController(new ConnectionButton());
-<<<<<<< HEAD
-=======
-
->>>>>>> b46a2db37a09e7dc6381c75ce363c07e1b6cded0
 
             Scene scene = new Scene(BoutonCo);
             primaryStage.setScene(scene);
