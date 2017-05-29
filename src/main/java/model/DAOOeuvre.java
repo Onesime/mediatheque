@@ -15,7 +15,7 @@ public class DAOOeuvre {
 
 	public static void main(String[] argv) {
 		/// get
-		Oeuvre Oeuvre1 = Oeuvre.getOeuvre(1);
+		Oeuvre Oeuvre1 = DAOOeuvre.getOeuvre(1);
 
 	}
 
