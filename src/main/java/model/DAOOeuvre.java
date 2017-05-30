@@ -27,9 +27,8 @@ public class DAOOeuvre {
 
 	static String deleteSQL = "DELETE FROM oeuvre WHERE id = ?";
 
-	static String createSQL = "BEGIN TRANSACTION toto/n INSERT INTO auteur (auteur.name) VALUES ('tototo'); " +
-			"INSERT INTO genre (genre.name) VALUES ('tototo');" +
-			"COMMIT toto/n";
+	static String createSQL = "INSERT INTO auteur (auteur.name) VALUES ('tototo'); "; //+
+			//"INSERT INTO genre (genre.name) VALUES ('tototot');";
 
 
 	public static void main(String[] argv) {
@@ -41,7 +40,8 @@ public class DAOOeuvre {
 		ArrayList<Oeuvre> oeuvres = daoOeuvre.getAllOeuvre();
 		System.out.println(oeuvres.get(0).getTitle());
 
-		Oeuvre oeuvre2 = new Oeuvre(0, "jeux_video", "Matrix", "Francois Dupont", "fantasy");
+		Oeuvre oeuvre2 = new Oeuvre(0, "jeux_video", "Matrix", "Francois Dupont", "fantasy",
+				"vf", "amzon", null, null, null, 4);
 		daoOeuvre.create(oeuvre2);
 		System.out.println(oeuvres.get(0).getId());
 		int id = oeuvre2.getId();
@@ -72,7 +72,13 @@ public class DAOOeuvre {
 						rs.getString("categorie.name"),
 						rs.getString("titre"),
 						rs.getString("auteur.name"),
-						rs.getString("genre.name"));
+						rs.getString("genre.name"),
+						rs.getString("langue.name"),
+						rs.getString("origine.name"),
+						rs.getString("date_acquisition"),
+						rs.getString("date_sortie"),
+						rs.getString("comment"),
+						rs.getInt("note"));
 				System.out.println(rs.getInt("id"));
 				System.out.println(rs.getString("titre"));
 				System.out.println(rs.getString("date_acquisition"));
@@ -118,7 +124,13 @@ public class DAOOeuvre {
 						rs.getString("categorie.name"),
 						rs.getString("titre"),
 						rs.getString("auteur.name"),
-						rs.getString("genre.name")));
+						rs.getString("genre.name"),
+						rs.getString("langue.name"),
+						rs.getString("origine.name"),
+						rs.getString("date_acquisition"),
+						rs.getString("date_sortie"),
+						rs.getString("comment"),
+						rs.getInt("note")));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -150,7 +162,7 @@ public class DAOOeuvre {
 		/// prepare + set
 		try	{
 			Statement statement = connection.createStatement();
-			statement.executeUpdate(createSQL);
+			statement.execute(createSQL);
 			/*
 			//PreparedStatement preparedStatement = connection.prepareStatement(createSQL, Statement.RETURN_GENERATED_KEYS);
 
