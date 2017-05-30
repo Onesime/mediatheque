@@ -7,14 +7,15 @@ import javafx.beans.property.*;
 
 public class Oeuvre {
 
-		private IntegerProperty id;
+    private IntegerProperty id;
     private final StringProperty title;
     private final StringProperty cat;
     private final StringProperty author;
     private final StringProperty genre;
 
 
-    public Oeuvre(String title, String cat, String author, String genre) {
+    public Oeuvre(int id, String cat, String title, String author, String genre) {
+        this.id = new SimpleIntegerProperty(id);
         this.title = new SimpleStringProperty(title);
         this.cat = new SimpleStringProperty(cat);
         this.author = new SimpleStringProperty(author);
@@ -22,7 +23,7 @@ public class Oeuvre {
     }
 
 		
-		public int getId() {
+    public int getId() {
         return id.get();
     }
 

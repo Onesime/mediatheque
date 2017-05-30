@@ -21,10 +21,10 @@ public class Main extends Application {
      * Définition des Table Data dans une ObservableList.
      */
     final ObservableList<Oeuvre> oeuvresData = FXCollections.observableArrayList(
-        new Oeuvre("Cornelia", "Movie", "truc", "sf"),
-        new Oeuvre("Werner", "Video Game", "chose", "fantasy"),
-        new Oeuvre("Anna", "Book", "glup", "thriller" ),
-        new Oeuvre("Martin", "Music", "fiofjf", "rock")
+        new Oeuvre(8,"Cornelia", "Movie", "truc", "sf"),
+        new Oeuvre(9,"Werner", "Video Game", "chose", "fantasy"),
+        new Oeuvre(10,"Anna", "Book", "glup", "thriller" ),
+        new Oeuvre(11,"Martin", "Music", "fiofjf", "rock")
     );
 
     public ObservableList<Oeuvre> getOeuvresData() {
@@ -47,7 +47,7 @@ public class Main extends Application {
 
             //loader.setController(new LogButton());
 
-            oeuvresData.add(new Oeuvre("Werner", "Video Game", "chose", "fantasy"));
+            oeuvresData.add(new Oeuvre(12,"Werner", "Video Game", "chose", "fantasy"));
 
             OeuvresController controller = loader.getController();
             controller.setMainApp(this);

@@ -92,7 +92,7 @@ public class Oeuvre
 	public static Oeuvre getOeuvre(int id)
 	{
 		/// conn
-		Connection connection = Dtb.getConnection();
+		Connection connection = Dtb.getInstance();
 
 		///
 		String selectSQL = "SELECT * FROM oeuvre WHERE id=?";
@@ -141,7 +141,7 @@ public class Oeuvre
 		if (this.isDataSet() == false) return;
 
 		/// conn
-		Connection connection = Dtb.getConnection();
+		Connection connection = Dtb.getInstance();
 
 		///
 		String selectSQL = "INSERT INTO oeuvre (titre, note, date_acquisition, date_sortie, comment) VALUES (?,?,now(),now(),?)";
@@ -167,7 +167,7 @@ public class Oeuvre
 		if (this.isDataSet() == false || this.id == 0) return;
 
 		/// conn
-		Connection connection = Dtb.getConnection();
+		Connection connection = Dtb.getInstance();
 
 		/// date
 		/// date
