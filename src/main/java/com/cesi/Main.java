@@ -10,6 +10,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Oeuvre;
+import model.DAOOeuvre;
+import java.util.ArrayList;
 
 import java.io.IOException;
 
@@ -17,15 +19,17 @@ public class Main extends Application {
 
     private Stage primaryStage;
 
+		ArrayList<Oeuvre> toto = new DAOOeuvre().getAllOeuvre();
+
     /**
      * Définition des Table Data dans une ObservableList.
      */
-    final ObservableList<Oeuvre> oeuvresData = FXCollections.observableArrayList(
+    final ObservableList<Oeuvre> oeuvresData = FXCollections.observableArrayList(/*
         new Oeuvre(8,"Cornelia", "Movie", "truc", "sf", "vf", "amazon", null, null, null, 4),
         new Oeuvre(9,"Werner", "Video Game", "chose", "fantasy", "vo", "fnac",null, null, null, 4),
         new Oeuvre(10,"Anna", "Book", "glup", "thriller", "vf", "amazon", null, null, null, 4),
         new Oeuvre(11,"Martin", "Music", "fiofjf", "rock", "vf", "amazon", null, null, null, 4)
-    );
+    */toto);
 
     public ObservableList<Oeuvre> getOeuvresData() {
         return oeuvresData;
