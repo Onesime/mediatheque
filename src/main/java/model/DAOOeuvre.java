@@ -16,8 +16,8 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 	private Connection connection = Dtb.getInstance();
 
 	static String selectSQL = "SELECT *, auteur.name, genre.name, langue.name, categorie.name, " +
-			"origine.name, plateforme.name, morceau.name FROM oeuvre " +
-			"LEFT JOIN morceau ON oeuvre.id=morceau.oeuvre_id " +
+			"origine.name, plateforme.name FROM oeuvre " +
+			//"LEFT JOIN morceau ON oeuvre.id=morceau.oeuvre_id " +
 			"LEFT JOIN plateforme ON oeuvre.plateforme_id=plateforme.id " +
 			"INNER JOIN origine ON oeuvre.origine_id=origine.id " +
 			"INNER JOIN categorie ON oeuvre.categorie_id=categorie.id " +
@@ -27,8 +27,9 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 
 	static String deleteSQL = "DELETE FROM oeuvre WHERE id = ?";
 
-	static String createSQL = "INSERT INTO auteur (auteur.name) VALUES ('tototo'); "; //+
-			//"INSERT INTO genre (genre.name) VALUES ('tototot');";
+	static String createSQL = "INSERT INTO oeuvre (titre, date_acquisition, date_sortie, note, comment) " +
+			"VALUES (?,?,?,?,?)";// +
+			//"INSERT INTO genre (genre.name) VALUES ('rdtfyugih')";
 
 	static String updateSQL = "UPDATE oeuvre SET titre=?, note=?, comment=?, categorie_id=?, genre_id=? WHERE id=?";
 
@@ -44,15 +45,10 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 		ArrayList<Oeuvre> oeuvres = daoOeuvre.getAllOeuvre();
 		System.out.println(oeuvres.get(0).getTitle());
 
-		Oeuvre oeuvre2 = new Oeuvre(0, "jeux_video", "Matrix", "Francois Dupont", "fantasy",
-				"vf", "amazon", null, null, null, 4);
-		daoOeuvre.save(oeuvre2);
-		System.out.println(oeuvres.get(0).getId());
 		int id = oeuvre2.getId();
 		daoOeuvre.delete(oeuvre2);
 		Oeuvre oeuvre3 = daoOeuvre.getOeuvre(oeuvre2.getId());
 		if (oeuvre3 == null) System.out.println("Delete à fonctionner");
-		*/
 		/// Verifier que si on obtient 1 oeuvre depuis la base de donnée
 		/// Puis on la modifie et on update
 		/// Que l'objet en base de donnée à était correctement update
@@ -63,8 +59,19 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 		daoOeuvre.updateColumn("comment", oeuvre4.getComment(), oeuvre4.getId());
 		Oeuvre oeuvre3 = daoOeuvre.getOeuvre(11);
 		if (oeuvre3.getComment().equals(comment)) System.out.println("Update à fonctionner");
-
-
+		*/
+		/*
+		Oeuvre oeuvre2 = new Oeuvre(1, "Rrrrrrr","jeux_video",  "Francois Dupont", "fantasy",
+				"vf", "amazon", "2017-05-28", null, "amazing", 5);
+		daoOeuvre.save(oeuvre2);
+		System.out.println(oeuvre2.getId());
+		*/
+		Oeuvre oeuvre = daoOeuvre.getOeuvre(11);
+		if (oeuvre != null) {
+			System.out.println(oeuvre.getTitle());
+			oeuvre.setAuthor("srdtfyughijok");
+			daoOeuvre.updateForeignKey(oeuvre.getId(), "auteur", oeuvre.getAuthor());
+		}
 
 	}
 
@@ -89,7 +96,7 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 						rs.getInt("id"),
 						rs.getString("categorie.name"),
 						rs.getString("titre"),
-						rs.getString("auteur.name"),
+						(rs.getString("auteur.name")==null) ? "" : rs.getString("auteur.name"),
 						rs.getString("genre.name"),
 						rs.getString("langue.name"),
 						rs.getString("origine.name"),
@@ -115,7 +122,7 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 				System.out.println(rs.getString("categorie.name"));
 				System.out.println(rs.getString("origine.name"));
 				System.out.println(rs.getString("plateforme.name"));
-				System.out.println(rs.getString("morceau.name"));
+				//System.out.println(rs.getString("morceau.name"));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -180,22 +187,25 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 	public void save(Oeuvre oeuvre){
 		/// prepare + set
 		try	{
-			Statement statement = connection.createStatement();
-			statement.execute(createSQL);
-			/*
-			//PreparedStatement preparedStatement = connection.prepareStatement(createSQL, Statement.RETURN_GENERATED_KEYS);
+//			Statement statement = connection.createStatement();
+//			statement.execute(createSQL);
 
-			//preparedStatement.setString(1, oeuvre.getAuthor());
-//			preparedStatement.setString(2, oeuvre.getGenre());
+			PreparedStatement preparedStatement = connection.prepareStatement(createSQL, Statement.RETURN_GENERATED_KEYS);
+
+			preparedStatement.setString(1, oeuvre.getTitle());
+			preparedStatement.setString(2, oeuvre.getStringDate_acquisition());
+			preparedStatement.setString(3, oeuvre.getStringDate_sortie());
+			preparedStatement.setInt(4, oeuvre.getNote());
+			preparedStatement.setString(5, oeuvre.getComment());
 
 			/// result
-			int affected = preparedStatement.executeUpdate();
+
+			preparedStatement.executeUpdate();
 
 			ResultSet generated = preparedStatement.getGeneratedKeys();
 			if (generated.next()) {
 				oeuvre.setId(generated.getInt(1));
 			}
-			*/
 			//Oeuvre oeuvre = new Oeuvre();
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -224,7 +234,7 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 
 	}
 
-	public void updateColumn(String column, Object objet, int id) {
+	public void updateColumn(int id, String column, Object objet) {
 		try	{
 			String query = "UPDATE oeuvre SET " + column + "=? WHERE id=?";
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -235,6 +245,49 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 
 			/// result
 			preparedStatement.executeUpdate();
+
+			//Oeuvre oeuvre = new Oeuvre();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public void updateForeignKey(int idOeuvre, String key, Object objet) {
+		try	{
+			/// lookup
+			String query1 = "SELECT * FROM " + key + " WHERE name=?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query1);
+			preparedStatement.setObject(1, objet);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			/// Find the right id for the foreign table
+			int idForeign = 0;
+			if (rs.first()) {
+				System.out.println(rs.getInt("id"));
+				idForeign = rs.getInt("id");
+			} else {
+				String query2 = "INSERT INTO " + key + " (name) VALUES (?)";
+
+				preparedStatement = connection.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
+				preparedStatement.setObject(1, objet);
+				preparedStatement.executeUpdate();
+
+				ResultSet generated = preparedStatement.getGeneratedKeys();
+				if (generated.next()) {
+					idForeign = generated.getInt(1);
+				}
+			}
+
+			/// Set the right id for foreign column of the right oeuvre
+			String query3 = "UPDATE oeuvre SET " + key + "_id=? WHERE id=?";
+			preparedStatement = connection.prepareStatement(query3);
+			preparedStatement.setInt(1, idForeign);
+			preparedStatement.setInt(2, idOeuvre);
+			preparedStatement.executeUpdate();
+
+			System.out.println(idForeign);
+
+			/// modify
 
 			//Oeuvre oeuvre = new Oeuvre();
 		} catch (SQLException ex) {

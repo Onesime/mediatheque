@@ -18,8 +18,8 @@ public class Oeuvre {
     private final IntegerProperty note;
 
 
-    public Oeuvre(int id, String cat, String title, String author, String genre, String langue, String origine,
-                  LocalDate date_acquisition, LocalDate date_sortie, String comment, int note) {
+    public Oeuvre(int id, String title, String cat, String author, String genre, String langue, String origine,
+                  String date_acquisition, String date_sortie, String comment, int note) {
         this.id = new SimpleIntegerProperty(id);
         this.title = new SimpleStringProperty(title);
         this.cat = new SimpleStringProperty(cat);
@@ -135,6 +135,10 @@ public class Oeuvre {
         return date_acquisition.get();
     }
 
+    public String getStringDate_acquisition() {
+        return date_acquisition.get().toString();
+    }
+
     public void setDate_acquisition(LocalDate date_acquisition) {
         this.date_acquisition.set(date_acquisition);
     }
@@ -146,6 +150,10 @@ public class Oeuvre {
 
     public LocalDate getDate_sortie() {
         return date_sortie.get();
+    }
+
+    public String getStringDate_sortie() {
+        return date_sortie.get().toString();
     }
 
     public void setDate_sortie(LocalDate date_sortie) {
