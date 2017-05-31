@@ -11,7 +11,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class DAOOeuvre {
+public class DAOOeuvre implements IDao<Oeuvre>{
 
 	private Connection connection = Dtb.getInstance();
 
@@ -30,10 +30,14 @@ public class DAOOeuvre {
 	static String createSQL = "INSERT INTO auteur (auteur.name) VALUES ('tototo'); "; //+
 			//"INSERT INTO genre (genre.name) VALUES ('tototot');";
 
+	static String updateSQL = "UPDATE oeuvre SET titre=?, note=?, comment=?, categorie_id=?, genre_id=? WHERE id=?";
+
+
 
 	public static void main(String[] argv) {
 		/// get
-		DAOOeuvre daoOeuvre = new DAOOeuvre();
+
+		DAOOeuvre daoOeuvre = new DAOOeuvre();/*
 		Oeuvre oeuvre1 = daoOeuvre.getOeuvre(11);
 		System.out.println(oeuvre1.getTitle());
 
@@ -41,13 +45,27 @@ public class DAOOeuvre {
 		System.out.println(oeuvres.get(0).getTitle());
 
 		Oeuvre oeuvre2 = new Oeuvre(0, "jeux_video", "Matrix", "Francois Dupont", "fantasy",
-				"vf", "amzon", null, null, null, 4);
-		daoOeuvre.create(oeuvre2);
+				"vf", "amazon", null, null, null, 4);
+		daoOeuvre.save(oeuvre2);
 		System.out.println(oeuvres.get(0).getId());
 		int id = oeuvre2.getId();
 		daoOeuvre.delete(oeuvre2);
 		Oeuvre oeuvre3 = daoOeuvre.getOeuvre(oeuvre2.getId());
-		if (oeuvre3 == null) System.out.println("ahahahahah");
+		if (oeuvre3 == null) System.out.println("Delete à fonctionner");
+		*/
+		/// Verifier que si on obtient 1 oeuvre depuis la base de donnée
+		/// Puis on la modifie et on update
+		/// Que l'objet en base de donnée à était correctement update
+		Oeuvre oeuvre4 = daoOeuvre.getOeuvre(11);
+		String comment = "assez bien";
+		oeuvre4.setComment(comment);
+		//daoOeuvre.update(oeuvre4);
+		daoOeuvre.updateColumn("comment", oeuvre4.getComment(), oeuvre4.getId());
+		Oeuvre oeuvre3 = daoOeuvre.getOeuvre(11);
+		if (oeuvre3.getComment().equals(comment)) System.out.println("Update à fonctionner");
+
+
+
 	}
 
 	public Oeuvre getOeuvre(int id)
@@ -139,7 +157,7 @@ public class DAOOeuvre {
 		return oeuvres;
 	}
 
-
+	@Override
 	public void delete(Oeuvre oeuvre){
 
 		/// prepare + set
@@ -155,10 +173,11 @@ public class DAOOeuvre {
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
+
 	}
 
-
-	public void create(Oeuvre oeuvre){
+	@Override
+	public void save(Oeuvre oeuvre){
 		/// prepare + set
 		try	{
 			Statement statement = connection.createStatement();
@@ -181,7 +200,46 @@ public class DAOOeuvre {
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
+	}
 
+	public void update(Oeuvre oeuvre){
+		try	{
+			PreparedStatement preparedStatement = connection.prepareStatement(updateSQL);
+			preparedStatement.setString(1, oeuvre.getTitle());
+			preparedStatement.setInt(2, oeuvre.getNote());
+			preparedStatement.setString(3, oeuvre.getComment());
+
+			preparedStatement.setString(4, oeuvre.getGenre());
+			preparedStatement.setString(5, oeuvre.getCat());
+
+			preparedStatement.setInt(6, oeuvre.getId());
+
+			/// result
+			preparedStatement.executeUpdate();
+
+			//Oeuvre oeuvre = new Oeuvre();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
+	}
+
+	public void updateColumn(String column, Object objet, int id) {
+		try	{
+			String query = "UPDATE oeuvre SET " + column + "=? WHERE id=?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+			preparedStatement.setObject(1, objet);
+
+			preparedStatement.setInt(2, id);
+
+			/// result
+			preparedStatement.executeUpdate();
+
+			//Oeuvre oeuvre = new Oeuvre();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 
 }
