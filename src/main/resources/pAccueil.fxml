@@ -91,8 +91,14 @@
         <columns>
           <TableColumn fx:id="titleColumn" prefWidth="75.0" text="Title" />
           <TableColumn fx:id="catColumn" prefWidth="75.0" text="Catégorie" />
-            <TableColumn fx:id="authorColumn" prefWidth="75.0" text="Auteur" />
-            <TableColumn fx:id="genreColumn" prefWidth="75.0" text="Genre" />
+          <TableColumn fx:id="authorColumn" prefWidth="75.0" text="Auteur" />
+          <TableColumn fx:id="genreColumn" prefWidth="75.0" text="Genre" />
+            <TableColumn fx:id="langColumn" prefWidth="75.0" text="Langue" />
+            <TableColumn fx:id="originColumn" prefWidth="75.0" text="Origine" />
+            <TableColumn fx:id="acqDateColumn" prefWidth="75.0" text="Acquisition" />
+            <TableColumn fx:id="outDateColumn" prefWidth="75.0" text="Sortie" />
+            <TableColumn fx:id="commentColumn" prefWidth="75.0" text="Commentaire" />
+            <TableColumn fx:id="noteColumn" prefWidth="75.0" text="Note" />
         </columns>
       </TableView>
    </center>

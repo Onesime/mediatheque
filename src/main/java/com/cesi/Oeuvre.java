@@ -12,8 +12,8 @@ public class Oeuvre
 {
 	private int id;
 	private String titre;
-	// date acquisition
-	// date sortie
+	private Object acqDate;
+	private Object addDate;
 	private int note;
 	private String comment;
 

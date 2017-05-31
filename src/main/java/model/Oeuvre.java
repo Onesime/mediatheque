@@ -1,8 +1,6 @@
 package model;
 
 import java.time.LocalDate;
-import java.util.Date;
-
 import javafx.beans.property.*;
 
 public class Oeuvre {
@@ -14,14 +12,14 @@ public class Oeuvre {
     private final StringProperty genre;
     private final StringProperty langue;
     private final StringProperty origine;
-    private final StringProperty date_acquisition;
-    private final StringProperty date_sortie;
+    private final ObjectProperty<LocalDate> date_acquisition;
+    private final ObjectProperty<LocalDate> date_sortie;
     private final StringProperty comment;
     private final IntegerProperty note;
 
 
     public Oeuvre(int id, String cat, String title, String author, String genre, String langue, String origine,
-                  String date_acquisition, String date_sortie, String comment, int note) {
+                  LocalDate date_acquisition, LocalDate date_sortie, String comment, int note) {
         this.id = new SimpleIntegerProperty(id);
         this.title = new SimpleStringProperty(title);
         this.cat = new SimpleStringProperty(cat);
@@ -29,8 +27,8 @@ public class Oeuvre {
         this.genre = new SimpleStringProperty(genre);
         this.langue = new SimpleStringProperty(langue);
         this.origine = new SimpleStringProperty(origine);
-        this.date_acquisition = new SimpleStringProperty(date_acquisition);
-        this.date_sortie = new SimpleStringProperty(date_sortie);
+        this.date_acquisition = new SimpleObjectProperty(date_acquisition);
+        this.date_sortie = new SimpleObjectProperty(date_sortie);
         this.comment = new SimpleStringProperty(comment);
         this.note = new SimpleIntegerProperty(note);
     }
@@ -119,42 +117,42 @@ public class Oeuvre {
 
 
 
-    public String getOrigin() {
+    public String getOrigine() {
         return origine.get();
     }
 
-    public void setOrigin(String origin) {
-        this.origine.set(origin);
+    public void setOrigine(String origine) {
+        this.origine.set(origine);
     }
 
-    public StringProperty originProperty() {
+    public StringProperty origineProperty() {
         return origine;
     }
 
 
 
-    public String getDate_acquisition() {
+    public LocalDate getDate_acquisition() {
         return date_acquisition.get();
     }
 
-    public void setDate_acquisition(String date_acquisition) {
+    public void setDate_acquisition(LocalDate date_acquisition) {
         this.date_acquisition.set(date_acquisition);
     }
 
-    public StringProperty date_acquisitionProperty() {
+    public ObjectProperty<LocalDate> date_acquisitionProperty() {
         return date_acquisition;
     }
 
 
-    public String getDate__sortie() {
+    public LocalDate getDate_sortie() {
         return date_sortie.get();
     }
 
-    public void setDate_sortie(String date_sortie) {
+    public void setDate_sortie(LocalDate date_sortie) {
         this.date_sortie.set(date_sortie);
     }
 
-    public StringProperty date_sortieProperty() {
+    public ObjectProperty<LocalDate> date_sortieProperty() {
         return date_sortie;
     }
 
@@ -168,7 +166,7 @@ public class Oeuvre {
         this.comment.set(comment);
     }
 
-    public StringProperty CommentProperty() {
+    public StringProperty commentProperty() {
         return comment;
     }
 
