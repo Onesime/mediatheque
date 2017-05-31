@@ -18,8 +18,7 @@ public class Oeuvre {
     private final IntegerProperty note;
 
 
-    public Oeuvre(int id, String title, String cat, String author, String genre, String langue, String origine,
-                  String date_acquisition, String date_sortie, String comment, int note) {
+    public Oeuvre(int id, String title, String cat, String author, String genre, String langue, String origine, String date_acquisition, String date_sortie, String comment, int note) {
         this.id = new SimpleIntegerProperty(id);
         this.title = new SimpleStringProperty(title);
         this.cat = new SimpleStringProperty(cat);

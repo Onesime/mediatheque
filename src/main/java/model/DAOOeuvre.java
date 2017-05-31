@@ -94,8 +94,8 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 			while (rs.next()) {
 				oeuvre = new Oeuvre(
 						rs.getInt("id"),
-						rs.getString("categorie.name"),
 						rs.getString("titre"),
+						rs.getString("categorie.name"),
 						(rs.getString("auteur.name")==null) ? "" : rs.getString("auteur.name"),
 						rs.getString("genre.name"),
 						rs.getString("langue.name"),
