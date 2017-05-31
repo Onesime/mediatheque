@@ -50,16 +50,16 @@ public class OeuvresController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
-        catColumn.setCellValueFactory(new PropertyValueFactory<>("Catégorie"));
-        authorColumn.setCellValueFactory(new PropertyValueFactory<>("Auteur"));
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        catColumn.setCellValueFactory(new PropertyValueFactory<>("cat"));
+        authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         genreColumn.setCellValueFactory(new PropertyValueFactory<>("Genre"));
-        langColumn.setCellValueFactory(new PropertyValueFactory<>("Langue"));
-        originColumn.setCellValueFactory(new PropertyValueFactory<>("Origine"));
-        acqDateColumn.setCellValueFactory(new PropertyValueFactory<>("Acquisition"));
-        outDateColumn.setCellValueFactory(new PropertyValueFactory<>("Sortie"));
-        commentColumn.setCellValueFactory(new PropertyValueFactory<>("Commentaire"));
-        noteColumn.setCellValueFactory(new PropertyValueFactory<>("Note"));
+        langColumn.setCellValueFactory(new PropertyValueFactory<>("langue"));
+        originColumn.setCellValueFactory(new PropertyValueFactory<>("origine"));
+        acqDateColumn.setCellValueFactory(new PropertyValueFactory<>("date_acquisition"));
+        outDateColumn.setCellValueFactory(new PropertyValueFactory<>("date_sortie"));
+        commentColumn.setCellValueFactory(new PropertyValueFactory<>("comment"));
+        noteColumn.setCellValueFactory(new PropertyValueFactory<>("note"));
 
         oeuvresTable.getItems().addAll(oeuvreRepo.getAllOeuvre());
 
