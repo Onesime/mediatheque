@@ -9,13 +9,16 @@ import com.cesi.Main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.DAOOeuvre;
 import model.Oeuvre;
 
-public class OeuvresController {
+public class OeuvresController implements Initializable {
+    private final DAOOeuvre oeuvreRepo;
     @FXML
     private TableView<Oeuvre> oeuvresTable;
     @FXML
@@ -40,21 +43,25 @@ public class OeuvresController {
     private TableColumn<Oeuvre, Integer> noteColumn;
 
 
-    private int iNumber = 1;
+    public OeuvresController() {
+        this.oeuvreRepo = new DAOOeuvre();
+    }
 
-    final ObservableList<Oeuvre> data = FXCollections.observableArrayList();
 
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
-        titleColumn.setCellValueFactory(cellData -> cellData.getValue().titleProperty());
-        catColumn.setCellValueFactory(cellData -> cellData.getValue().catProperty());
-        authorColumn.setCellValueFactory(cellData -> cellData.getValue().authorProperty());
-        genreColumn.setCellValueFactory(cellData -> cellData.getValue().genreProperty());
-        langColumn.setCellValueFactory(cellData -> cellData.getValue().langueProperty());
-        originColumn.setCellValueFactory(cellData -> cellData.getValue().origineProperty());
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        catColumn.setCellValueFactory(new PropertyValueFactory<>("Catégorie"));
+        authorColumn.setCellValueFactory(new PropertyValueFactory<>("Auteur"));
+        genreColumn.setCellValueFactory(new PropertyValueFactory<>("Genre"));
+        langColumn.setCellValueFactory(new PropertyValueFactory<>("Langue"));
+        originColumn.setCellValueFactory(new PropertyValueFactory<>("Origine"));
         acqDateColumn.setCellValueFactory(new PropertyValueFactory<>("Acquisition"));
         outDateColumn.setCellValueFactory(new PropertyValueFactory<>("Sortie"));
-        commentColumn.setCellValueFactory(cellData -> cellData.getValue().commentProperty());
-        noteColumn.setCellValueFactory(cellData -> cellData.getValue().noteProperty().asObject());
+        commentColumn.setCellValueFactory(new PropertyValueFactory<>("Commentaire"));
+        noteColumn.setCellValueFactory(new PropertyValueFactory<>("Note"));
+
+        oeuvresTable.getItems().addAll(oeuvreRepo.getAllOeuvre());
 
     }
 
