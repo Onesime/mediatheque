@@ -76,7 +76,7 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 			oeuvre.setAuthor("srdtfyughijok");
 			daoOeuvre.updateForeignKey(oeuvre.getId(), "auteur", oeuvre.getAuthor());
 		}
-		ArrayList<Oeuvre> oeuvres = daoOeuvre.getAllOeuvre();
+		ArrayList<Oeuvre> oeuvres = daoOeuvre.getAllOeuvreBetweenYears(1995, 2000);
 		System.out.println(oeuvres.get(0).getTitle());
 	}
 
@@ -303,6 +303,102 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
+	}
+
+	public ArrayList<Oeuvre> getAllOeuvreByCat(String cat){
+		ArrayList<Oeuvre> oeuvres = new ArrayList<Oeuvre>();
+
+		/// prepare + set
+		try	{
+			String query = selectSQL + " WHERE categorie.name=?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, cat);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				ArrayList<String> supports = getSupports(id);
+				oeuvres.add(this.fetch(rs, supports));
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
+		return oeuvres;
+	}
+
+	public ArrayList<Oeuvre> getAllOeuvreByGenre(String genre) {
+		ArrayList<Oeuvre> oeuvres = new ArrayList<Oeuvre>();
+
+		/// prepare + set
+		try {
+			String query = selectSQL + " WHERE genre.name=?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, genre);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				ArrayList<String> supports = getSupports(id);
+				oeuvres.add(this.fetch(rs, supports));
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
+		return oeuvres;
+	}
+
+	public ArrayList<Oeuvre> getAllOeuvreByNote(int note) {
+		ArrayList<Oeuvre> oeuvres = new ArrayList<Oeuvre>();
+
+		/// prepare + set
+		try {
+			String query = selectSQL + " WHERE oeuvre.note=?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, note);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				ArrayList<String> supports = getSupports(id);
+				oeuvres.add(this.fetch(rs, supports));
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
+		return oeuvres;
+	}
+
+	public ArrayList<Oeuvre> getAllOeuvreByYear(int year) {
+
+
+		return getAllOeuvreBetweenYears(year, year+1);
+	}
+
+	public ArrayList<Oeuvre> getAllOeuvreBetweenYears(int begin, int end) {
+		ArrayList<Oeuvre> oeuvres = new ArrayList<Oeuvre>();
+
+		/// prepare + set
+		try {
+			String query = selectSQL + " WHERE oeuvre.date_sortie>=? AND oeuvre.date_sortie<?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			String dateMin = Integer.toString(begin) + "-01-01";
+			String dateMax = Integer.toString(end) + "-01-01";
+			preparedStatement.setString(1, dateMin);
+			preparedStatement.setString(2, dateMax);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				ArrayList<String> supports = getSupports(id);
+				oeuvres.add(this.fetch(rs, supports));
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return oeuvres;
 	}
 
 }
