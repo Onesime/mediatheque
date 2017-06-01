@@ -19,11 +19,15 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 			"origine.name, plateforme.name FROM oeuvre " +
 			//"LEFT JOIN morceau ON oeuvre.id=morceau.oeuvre_id " +
 			"LEFT JOIN plateforme ON oeuvre.plateforme_id=plateforme.id " +
-			"INNER JOIN origine ON oeuvre.origine_id=origine.id " +
-			"INNER JOIN categorie ON oeuvre.categorie_id=categorie.id " +
-			"INNER JOIN auteur ON oeuvre.auteur_id=auteur.id " +
-			"INNER JOIN genre ON oeuvre.genre_id=genre.id " +
-			"INNER JOIN langue ON oeuvre.langue_id=langue.id";
+			"LEFT JOIN origine ON oeuvre.origine_id=origine.id " +
+			"LEFT JOIN categorie ON oeuvre.categorie_id=categorie.id " +
+			"LEFT JOIN auteur ON oeuvre.auteur_id=auteur.id " +
+			"LEFT JOIN genre ON oeuvre.genre_id=genre.id " +
+			"LEFT JOIN langue ON oeuvre.langue_id=langue.id";
+
+	static String selectSQLSupport = "SELECT t1.name AS supportName FROM oeuvre_has_support " +
+			"LEFT JOIN support AS t1 ON oeuvre_has_support.support_id = t1.id WHERE oeuvre_has_support.oeuvre_id=?";// +
+			//"LEFT JOIN oeuvre  AS t2 ON oeuvre_has_support.oeuvre_id = t2.id ;
 
 	static String deleteSQL = "DELETE FROM oeuvre WHERE id = ?";
 
@@ -72,7 +76,25 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 			oeuvre.setAuthor("srdtfyughijok");
 			daoOeuvre.updateForeignKey(oeuvre.getId(), "auteur", oeuvre.getAuthor());
 		}
+		ArrayList<Oeuvre> oeuvres = daoOeuvre.getAllOeuvre();
+		System.out.println(oeuvres.get(0).getTitle());
+	}
 
+	protected Oeuvre fetch(ResultSet resultSet, ArrayList<String> supports) throws SQLException{
+		return  new Oeuvre(
+				resultSet.getInt("id"),
+				resultSet.getString("titre"),
+				resultSet.getString("categorie.name"),
+				resultSet.getString("auteur.name"),
+				//(rs.getString("auteur.name")==null) ? "" : rs.getString("auteur.name"),
+				resultSet.getString("genre.name"),
+				resultSet.getString("langue.name"),
+				resultSet.getString("origine.name"),
+				resultSet.getString("date_acquisition"),
+				resultSet.getString("date_sortie"),
+				resultSet.getString("comment"),
+				resultSet.getInt("note"),
+				supports);
 	}
 
 	public Oeuvre getOeuvre(int id)
@@ -81,29 +103,18 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 		Oeuvre oeuvre = null;
 		String query = selectSQL + " WHERE oeuvre.id=?";
 
+
 		/// prepare + set
 		try	{
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
-
 			preparedStatement.setInt(1, id);
-
 			/// result
 			ResultSet rs = preparedStatement.executeQuery();
 
-			//Oeuvre oeuvre = new Oeuvre();
+			ArrayList<String> supports = getSupports(id);
+
 			while (rs.next()) {
-				oeuvre = new Oeuvre(
-						rs.getInt("id"),
-						rs.getString("titre"),
-						rs.getString("categorie.name"),
-						(rs.getString("auteur.name")==null) ? "" : rs.getString("auteur.name"),
-						rs.getString("genre.name"),
-						rs.getString("langue.name"),
-						rs.getString("origine.name"),
-						rs.getString("date_acquisition"),
-						rs.getString("date_sortie"),
-						rs.getString("comment"),
-						rs.getInt("note"));
+				oeuvre = fetch(rs, supports);
 				System.out.println(rs.getInt("id"));
 				System.out.println(rs.getString("titre"));
 				System.out.println(rs.getString("date_acquisition"));
@@ -131,6 +142,17 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 		return oeuvre;
 	}
 
+	private ArrayList<String> getSupports(int id) throws SQLException {
+		PreparedStatement preparedStatement2 = connection.prepareStatement(selectSQLSupport);
+		preparedStatement2.setInt(1, id);
+		ResultSet rs2 = preparedStatement2.executeQuery();
+		ArrayList<String> supports = new ArrayList<String>();
+		while (rs2.next()) {
+            supports.add(rs2.getString("supportName"));
+        }
+		return supports;
+	}
+
 	public ArrayList<Oeuvre> getAllOeuvre() {
 		/// conn
 		ArrayList<Oeuvre> oeuvres = new ArrayList<Oeuvre>();
@@ -138,24 +160,12 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 		/// prepare + set
 		try	{
 			PreparedStatement preparedStatement = connection.prepareStatement(selectSQL);
-
-			/// result
 			ResultSet rs = preparedStatement.executeQuery();
 
-			//Oeuvre oeuvre = new Oeuvre();
 			while (rs.next()) {
-				oeuvres.add(new Oeuvre(
-						rs.getInt("id"),
-						rs.getString("titre"),
-						rs.getString("categorie.name"),
-						rs.getString("auteur.name"),
-						rs.getString("genre.name"),
-						rs.getString("langue.name"),
-						rs.getString("origine.name"),
-						rs.getString("date_acquisition"),
-						rs.getString("date_sortie"),
-						rs.getString("comment"),
-						rs.getInt("note")));
+				int id = rs.getInt("id");
+				ArrayList<String> supports = getSupports(id);
+				oeuvres.add(this.fetch(rs, supports));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();

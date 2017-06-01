@@ -1,6 +1,8 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+
 import javafx.beans.property.*;
 
 public class Oeuvre {
@@ -16,9 +18,11 @@ public class Oeuvre {
     private final ObjectProperty<LocalDate> date_sortie;
     private final StringProperty comment;
     private final IntegerProperty note;
+    private final ArrayList<String> supports;
 
 
-    public Oeuvre(int id, String title, String cat, String author, String genre, String langue, String origine, String date_acquisition, String date_sortie, String comment, int note) {
+    public Oeuvre(int id, String title, String cat, String author, String genre, String langue, String origine,
+                  String date_acquisition, String date_sortie, String comment, int note, ArrayList<String> supports) {
         this.id = new SimpleIntegerProperty(id);
         this.title = new SimpleStringProperty(title);
         this.cat = new SimpleStringProperty(cat);
@@ -30,6 +34,7 @@ public class Oeuvre {
         this.date_sortie = new SimpleObjectProperty(date_sortie);
         this.comment = new SimpleStringProperty(comment);
         this.note = new SimpleIntegerProperty(note);
+        this.supports = supports;
     }
 
 		

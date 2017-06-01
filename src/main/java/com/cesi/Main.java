@@ -46,8 +46,6 @@ public class Main extends Application {
 
             //loader.setController(new LogButton());
 
-            oeuvresData.add(new Oeuvre(12,"Werner", "Video Game", "chose", "fantasy", "vf", "amazon", null, null, null, 4));
-
             OeuvresController controller = loader.getController();
             controller.setMainApp(this);
 
