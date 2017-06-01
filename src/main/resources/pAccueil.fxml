@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OeuvresController">
    <top>
@@ -41,9 +42,6 @@
                <children>
                   <TextField />
                   <Button mnemonicParsing="false" text="Rechercher" />
-                  <Region HBox.hgrow="ALWAYS" />
-                  <Button fx:id="logButton" mnemonicParsing="false" text="Log in" />
-                  <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="78.0" text="Settings" />
                </children>
                <VBox.margin>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
@@ -52,9 +50,19 @@
                   <Insets left="8.0" />
                </padding>
             </HBox>
+            <HBox prefHeight="9.0" prefWidth="900.0">
+               <children>
+                  <Region prefHeight="100.0" prefWidth="419.0" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Accueil" textAlignment="CENTER">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
             <HBox>
                <children>
-                  <Button mnemonicParsing="false" text="Ajouter">
+                  <Button fx:id="add_oeuvre" mnemonicParsing="false" text="Ajouter">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
@@ -89,16 +97,16 @@
    <center>
       <TableView fx:id="oeuvresTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn fx:id="titleColumn" prefWidth="75.0" text="Title" />
-          <TableColumn fx:id="catColumn" prefWidth="75.0" text="Catégorie" />
-          <TableColumn fx:id="authorColumn" prefWidth="75.0" text="Auteur" />
-          <TableColumn fx:id="genreColumn" prefWidth="75.0" text="Genre" />
-            <TableColumn fx:id="langColumn" prefWidth="75.0" text="Langue" />
-            <TableColumn fx:id="originColumn" prefWidth="75.0" text="Origine" />
-            <TableColumn fx:id="acqDateColumn" prefWidth="75.0" text="Acquisition" />
-            <TableColumn fx:id="outDateColumn" prefWidth="75.0" text="Sortie" />
-            <TableColumn fx:id="commentColumn" prefWidth="75.0" text="Commentaire" />
-            <TableColumn fx:id="noteColumn" prefWidth="75.0" text="Note" />
+          <TableColumn fx:id="titleColumn" prefWidth="83.0" text="Titre" />
+          <TableColumn fx:id="catColumn" prefWidth="82.0" text="Catégorie" />
+          <TableColumn fx:id="authorColumn" prefWidth="76.0" text="Auteur" />
+          <TableColumn fx:id="genreColumn" prefWidth="81.0" text="Genre" />
+            <TableColumn fx:id="langColumn" prefWidth="71.0" text="Langue" />
+            <TableColumn fx:id="originColumn" prefWidth="83.0" text="Origine" />
+            <TableColumn fx:id="acqDateColumn" prefWidth="103.0" text="Acquisition" />
+            <TableColumn fx:id="outDateColumn" prefWidth="93.0" text="Sortie" />
+            <TableColumn fx:id="commentColumn" prefWidth="140.0" text="Commentaire" />
+            <TableColumn fx:id="noteColumn" prefWidth="87.0" text="Note" />
         </columns>
       </TableView>
    </center>
