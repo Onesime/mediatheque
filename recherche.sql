@@ -7,7 +7,7 @@
 
 	-Ajoute : "WHERE categorie.name=?"
 
-	-Signature : "ArrayList<Oeuvre> getOeuvresByCat(String cat)"
+	-Fonction : "ArrayList<Oeuvre> getOeuvresByCat(String cat)"
 
 2: Par genre
 

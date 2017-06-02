@@ -9,15 +9,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import scene.AdOeuvreScene;
+//import scene.AdOeuvreScene;
 
-public class ConnectionButton implements Initializable{
+public class ConnectionButton/** implements Initializable*/{
     protected final FXMLLoader loader = new FXMLLoader();
     protected final Stage stage = new Stage();
 
     @FXML
-    Button ad_oeuvre;
-
+    Button add_oeuvre;
+		/*
     private void handleButtonAction(ActionEvent event) {
         ad_oeuvre.setOnAction(loader.setLocation(Main.class.getResource("/ad.oeuvre.fxml")).show());
     }
@@ -27,6 +27,7 @@ public class ConnectionButton implements Initializable{
         // TODO Auto-generated method stub
         ad_oeuvre.setOnAction(this::handleButtonAction);
     }
+	*/
 
 }
 

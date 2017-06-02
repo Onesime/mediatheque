@@ -305,6 +305,28 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 		}
 	}
 
+	public ArrayList<Oeuvre> getAllOeuvreByTitle(String title){
+		ArrayList<Oeuvre> oeuvres = new ArrayList<Oeuvre>();
+
+		/// prepare + set
+		try	{
+			String query = selectSQL + " WHERE oeuvre.titre LIKE '%" + title + "%'";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			//preparedStatement.setString(1, title);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				ArrayList<String> supports = getSupports(id);
+				oeuvres.add(this.fetch(rs, supports));
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
+		return oeuvres;
+	}
+
 	public ArrayList<Oeuvre> getAllOeuvreByCat(String cat){
 		ArrayList<Oeuvre> oeuvres = new ArrayList<Oeuvre>();
 
@@ -372,8 +394,6 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 	}
 
 	public ArrayList<Oeuvre> getAllOeuvreByYear(int year) {
-
-
 		return getAllOeuvreBetweenYears(year, year+1);
 	}
 

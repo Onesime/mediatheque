@@ -1,6 +1,12 @@
 package com.cesi;
 
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+
+/// Controller
 import controller.OeuvresController;
+import controller.RechercheController;
+
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,14 +48,18 @@ public class Main extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("/pAccueil.fxml"));
-            BorderPane logButton = loader.load();
-
-            //loader.setController(new LogButton());
-
+            BorderPane borderPane = loader.load();
+					
+						/// Controller pour oeuvre
             OeuvresController controller = loader.getController();
             controller.setMainApp(this);
 
-            Scene scene = new Scene(logButton);
+						/// Controller recherche
+						//Button rechercher = loader.load();
+						//RechercheController rechercheController = loader.getController();
+						//rechercheController.setMainApp(this);
+
+            Scene scene = new Scene(borderPane);
             primaryStage.setScene(scene);
             primaryStage.show();
 
