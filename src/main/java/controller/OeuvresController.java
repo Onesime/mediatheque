@@ -12,6 +12,8 @@ import javafx.scene.Parent;
 
 import java.io.IOException;
 
+import javafx.application.Platform;
+
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Date;
@@ -115,6 +117,7 @@ public class OeuvresController implements Initializable {
 
 			//Stage primaryStage = this.main.getPrimaryStage();
 			stage = (Stage) rechercher.getScene().getWindow();
+			//root = FXMLLoader.load(getClass().getResource("/suppr.fxml"));
 			root = FXMLLoader.load(getClass().getResource("/pAccueil.fxml"));
 			/*
 			FXMLLoader loader = new FXMLLoader();
@@ -124,10 +127,11 @@ public class OeuvresController implements Initializable {
       primaryStage.setScene(scene);
       primaryStage.show();
 			*/
-
-			Scene scene = new Scene(root);
-      stage.setScene(scene);
-      stage.show();
+			Platform.runLater(() -> {
+				Scene scene = new Scene(root);
+      	stage.setScene(scene);
+      	stage.show();
+			});
     }
 
     private Main main;
