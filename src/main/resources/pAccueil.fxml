@@ -6,16 +6,15 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OeuvresController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -40,8 +39,9 @@
             </MenuBar>
             <HBox spacing="8.0">
                <children>
+                  <Button fx:id="btnAccueil" mnemonicParsing="false" onAction="#pageAccueil" text="Accueil" />
                   <TextField fx:id="inputRechercher" />
-                  <Button fx:id="rechercher" mnemonicParsing="false" onAction="#actionRechercher" text="Rechercher" />
+                  <Button fx:id="btnRechercher" mnemonicParsing="false" onAction="#actionRechercher" text="Rechercher" />
                </children>
                <VBox.margin>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
@@ -62,12 +62,12 @@
             </HBox>
             <HBox>
                <children>
-                  <Button fx:id="add_oeuvre" mnemonicParsing="false" text="Ajouter">
+                  <Button fx:id="add_oeuvre" mnemonicParsing="false" onAction="#pageAddOeuvre" text="Ajouter">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="Recherche avancée">
+                  <Button fx:id="rechercheAvancee" mnemonicParsing="false" onAction="#pageRechercheAvancee" text="Recherche avancée">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
@@ -95,19 +95,9 @@
       </HBox>
    </bottom>
    <center>
-      <TableView fx:id="oeuvresTable" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-        <columns>
-          <TableColumn fx:id="titleColumn" prefWidth="83.0" text="Titre" />
-          <TableColumn fx:id="catColumn" prefWidth="82.0" text="Catégorie" />
-          <TableColumn fx:id="authorColumn" prefWidth="76.0" text="Auteur" />
-          <TableColumn fx:id="genreColumn" prefWidth="81.0" text="Genre" />
-            <TableColumn fx:id="langColumn" prefWidth="71.0" text="Langue" />
-            <TableColumn fx:id="originColumn" prefWidth="83.0" text="Origine" />
-            <TableColumn fx:id="acqDateColumn" prefWidth="103.0" text="Acquisition" />
-            <TableColumn fx:id="outDateColumn" prefWidth="93.0" text="Sortie" />
-            <TableColumn fx:id="commentColumn" prefWidth="140.0" text="Commentaire" />
-            <TableColumn fx:id="noteColumn" prefWidth="87.0" text="Note" />
-        </columns>
-      </TableView>
+      <TilePane fx:id="content">
+         <children>
+         </children>
+      </TilePane>
    </center>
 </BorderPane>

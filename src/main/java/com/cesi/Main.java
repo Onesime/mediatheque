@@ -4,8 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 
 /// Controller
-import controller.OeuvresController;
-import controller.RechercheController;
+import controller.MainController;
+//import controller.RechercheController;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -30,11 +30,11 @@ public class Main extends Application {
     /**
      * Définition des Table Data dans une ObservableList.
      */
-    final ObservableList<Oeuvre> oeuvresData = FXCollections.observableArrayList(new DAOOeuvre().getAllOeuvre());
+    /*final ObservableList<Oeuvre> oeuvresData = FXCollections.observableArrayList(new DAOOeuvre().findAll());
 
     public ObservableList<Oeuvre> getOeuvresData() {
         return oeuvresData;
-    }
+    }*/
 
     @Override
     public void start(Stage primaryStage) {
@@ -51,7 +51,7 @@ public class Main extends Application {
             BorderPane borderPane = loader.load();
 					
 						/// Controller pour oeuvre
-            OeuvresController controller = loader.getController();
+            MainController controller = loader.getController();
             controller.setMainApp(this);
 
 						/// Controller recherche
@@ -68,8 +68,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
-
-
+		/*
     public void BoutonCo() {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -88,6 +87,7 @@ public class Main extends Application {
             e.printStackTrace();
         }
     }
+		*/
 
     public Stage getPrimaryStage() {
         return primaryStage;
@@ -96,4 +96,4 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-}// a suppr
+}

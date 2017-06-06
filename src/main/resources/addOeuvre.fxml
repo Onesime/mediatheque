@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<ScrollPane hbarPolicy="ALWAYS" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="400.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddOeuvreController">
+   <content>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Titre">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="titreInput">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Catégorie">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Label>
+            <ListView fx:id="listViewCat" prefHeight="26.0" prefWidth="414.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+               </VBox.margin>
+            </ListView>
+            <Label text="Date d'acquisition">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="dateAcquisitionInput">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Date de sortie">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="dateSortieInput">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Auteur">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="auteurInput">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Genre">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="genreInput">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Langue">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="langueInput">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Origine">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="origineInput">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Support">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="supportInput">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Note">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="noteInput">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </TextField>
+            <Label text="Comment">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextArea fx:id="commentInput" prefHeight="104.0" prefWidth="434.0">
+               <VBox.margin>
+                  <Insets left="20.0" />
+               </VBox.margin>
+            </TextArea>
+            <Label layoutX="30.0" layoutY="218.0" text="Plateforme">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="plateformeInput" layoutX="10.0" layoutY="187.0" prefHeight="31.0" prefWidth="361.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="20.0" right="30.0" top="5.0" />
+               </VBox.margin>
+            </TextField>
+						<Button fx:id="valider" layoutX="30.0" layoutY="218.0" onAction="#submitOeuvre" text="Valider">
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>

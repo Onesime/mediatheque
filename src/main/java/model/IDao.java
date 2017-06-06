@@ -1,9 +1,12 @@
 package model;
 
+import java.util.ArrayList;
 
 public interface IDao<T> {
 
-    void delete(T t);
-
-    void save(T t);
+	T find(int id);
+	ArrayList<T> findAll();
+	void update(T t);
+  void delete(T t);
+  void save(T t);
 }

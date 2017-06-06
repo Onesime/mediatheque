@@ -41,43 +41,6 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 
 	public static void main(String[] argv) {
 		/// get
-
-		DAOOeuvre daoOeuvre = new DAOOeuvre();/*
-		Oeuvre oeuvre1 = daoOeuvre.getOeuvre(11);
-		System.out.println(oeuvre1.getTitle());
-
-		ArrayList<Oeuvre> oeuvres = daoOeuvre.getAllOeuvre();
-		System.out.println(oeuvres.get(0).getTitle());
-
-		int id = oeuvre2.getId();
-		daoOeuvre.delete(oeuvre2);
-		Oeuvre oeuvre3 = daoOeuvre.getOeuvre(oeuvre2.getId());
-		if (oeuvre3 == null) System.out.println("Delete à fonctionner");
-		/// Verifier que si on obtient 1 oeuvre depuis la base de donnée
-		/// Puis on la modifie et on update
-		/// Que l'objet en base de donnée à était correctement update
-		Oeuvre oeuvre4 = daoOeuvre.getOeuvre(11);
-		String comment = "assez bien";
-		oeuvre4.setComment(comment);
-		//daoOeuvre.update(oeuvre4);
-		daoOeuvre.updateColumn("comment", oeuvre4.getComment(), oeuvre4.getId());
-		Oeuvre oeuvre3 = daoOeuvre.getOeuvre(11);
-		if (oeuvre3.getComment().equals(comment)) System.out.println("Update à fonctionner");
-		*/
-		/*
-		Oeuvre oeuvre2 = new Oeuvre(1, "Rrrrrrr","jeux_video",  "Francois Dupont", "fantasy",
-				"vf", "amazon", "2017-05-28", null, "amazing", 5);
-		daoOeuvre.save(oeuvre2);
-		System.out.println(oeuvre2.getId());
-		*/
-		Oeuvre oeuvre = daoOeuvre.getOeuvre(11);
-		if (oeuvre != null) {
-			System.out.println(oeuvre.getTitle());
-			oeuvre.setAuthor("srdtfyughijok");
-			daoOeuvre.updateForeignKey(oeuvre.getId(), "auteur", oeuvre.getAuthor());
-		}
-		ArrayList<Oeuvre> oeuvres = daoOeuvre.getAllOeuvreBetweenYears(1995, 2000);
-		System.out.println(oeuvres.get(0).getTitle());
 	}
 
 	protected Oeuvre fetch(ResultSet resultSet, ArrayList<String> supports) throws SQLException{
@@ -97,7 +60,8 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 				supports);
 	}
 
-	public Oeuvre getOeuvre(int id)
+	@Override
+	public Oeuvre find(int id)
 	{
 		/// conn
 		Oeuvre oeuvre = null;
@@ -115,25 +79,6 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 
 			while (rs.next()) {
 				oeuvre = fetch(rs, supports);
-				System.out.println(rs.getInt("id"));
-				System.out.println(rs.getString("titre"));
-				System.out.println(rs.getString("date_acquisition"));
-				System.out.println(rs.getString("date_sortie"));
-				System.out.println(rs.getInt("note"));
-				System.out.println(rs.getString("comment"));
-				System.out.println(rs.getInt("auteur_id"));
-				System.out.println(rs.getInt("genre_id"));
-				System.out.println(rs.getInt("langue_id"));
-				System.out.println(rs.getInt("plateforme_id"));
-				System.out.println(rs.getInt("origine_id"));
-				System.out.println(rs.getInt("categorie_id"));
-				System.out.println(rs.getString("auteur.name"));
-				System.out.println(rs.getString("genre.name"));
-				System.out.println(rs.getString("langue.name"));
-				System.out.println(rs.getString("categorie.name"));
-				System.out.println(rs.getString("origine.name"));
-				System.out.println(rs.getString("plateforme.name"));
-				//System.out.println(rs.getString("morceau.name"));
 			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
@@ -153,7 +98,8 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 		return supports;
 	}
 
-	public ArrayList<Oeuvre> getAllOeuvre() {
+	@Override
+	public ArrayList<Oeuvre> findAll() {
 		/// conn
 		ArrayList<Oeuvre> oeuvres = new ArrayList<Oeuvre>();
 
@@ -195,11 +141,7 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 
 	@Override
 	public void save(Oeuvre oeuvre){
-		/// prepare + set
 		try	{
-//			Statement statement = connection.createStatement();
-//			statement.execute(createSQL);
-
 			PreparedStatement preparedStatement = connection.prepareStatement(createSQL, Statement.RETURN_GENERATED_KEYS);
 
 			preparedStatement.setString(1, oeuvre.getTitle());
@@ -209,19 +151,27 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 			preparedStatement.setString(5, oeuvre.getComment());
 
 			/// result
-
 			preparedStatement.executeUpdate();
 
 			ResultSet generated = preparedStatement.getGeneratedKeys();
 			if (generated.next()) {
 				oeuvre.setId(generated.getInt(1));
 			}
-			//Oeuvre oeuvre = new Oeuvre();
+
+			/// Utilise update pour les champs foreign
+			this.updateForeignKey(oeuvre.getId(), "auteur", oeuvre.getAuthor());
+			this.updateForeignKey(oeuvre.getId(), "categorie", oeuvre.getCat());
+			this.updateForeignKey(oeuvre.getId(), "genre", oeuvre.getGenre());
+			this.updateForeignKey(oeuvre.getId(), "langue", oeuvre.getLangue());
+			this.updateForeignKey(oeuvre.getId(), "origine", oeuvre.getOrigine());
+			//this.updateForeignKey(oeuvre.getId(), "plateforme", oeuvre.getPlateforme());
+			// supports
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
 	}
 
+	@Override
 	public void update(Oeuvre oeuvre){
 		try	{
 			PreparedStatement preparedStatement = connection.prepareStatement(updateSQL);
@@ -241,7 +191,6 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}
-
 	}
 
 	public void updateColumn(int id, String column, Object objet) {
@@ -328,6 +277,7 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 	}
 
 	public ArrayList<Oeuvre> getAllOeuvreByCat(String cat){
+		System.out.println("DAOOeuvre::getAllOeuvreByCat::" + cat);
 		ArrayList<Oeuvre> oeuvres = new ArrayList<Oeuvre>();
 
 		/// prepare + set
@@ -350,6 +300,7 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 	}
 
 	public ArrayList<Oeuvre> getAllOeuvreByGenre(String genre) {
+		System.out.println("DAOOeuvre::getAllOeuvreByGenre::" + genre);
 		ArrayList<Oeuvre> oeuvres = new ArrayList<Oeuvre>();
 
 		/// prepare + set
@@ -372,6 +323,7 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 	}
 
 	public ArrayList<Oeuvre> getAllOeuvreByNote(int note) {
+		System.out.println("DAOOeuvre::getAllOeuvreByNote::" + note);
 		ArrayList<Oeuvre> oeuvres = new ArrayList<Oeuvre>();
 
 		/// prepare + set
@@ -398,6 +350,7 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 	}
 
 	public ArrayList<Oeuvre> getAllOeuvreBetweenYears(int begin, int end) {
+		System.out.println("DAOOeuvre::getAllOeuvreBetweenYears::" + begin + ":" + end);
 		ArrayList<Oeuvre> oeuvres = new ArrayList<Oeuvre>();
 
 		/// prepare + set

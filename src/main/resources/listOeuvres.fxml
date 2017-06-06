@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+
+<TableView fx:id="oeuvresTable" prefHeight="390.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ListOeuvresController">
+  <columns>
+    <TableColumn fx:id="titleColumn" prefWidth="83.0" text="Titre" />
+    <TableColumn fx:id="catColumn" prefWidth="82.0" text="Catégorie" />
+    <TableColumn fx:id="authorColumn" prefWidth="76.0" text="Auteur" />
+    <TableColumn fx:id="genreColumn" prefWidth="81.0" text="Genre" />
+    <TableColumn fx:id="langColumn" prefWidth="71.0" text="Langue" />
+    <TableColumn fx:id="originColumn" prefWidth="83.0" text="Origine" />
+    <TableColumn fx:id="acqDateColumn" prefWidth="103.0" text="Acquisition" />
+    <TableColumn fx:id="outDateColumn" prefWidth="93.0" text="Sortie" />
+    <TableColumn fx:id="commentColumn" prefWidth="140.0" text="Commentaire" />
+    <TableColumn fx:id="noteColumn" prefWidth="87.0" text="Note" />
+  </columns>
+</TableView>
