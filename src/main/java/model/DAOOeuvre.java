@@ -374,4 +374,26 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 		return oeuvres;
 	}
 
+	public ArrayList<Oeuvre> getAllOeuvreByDate(String begin, String end) {
+		ArrayList<Oeuvre> oeuvres = new ArrayList<Oeuvre>();
+
+		/// prepare + set
+		try {
+			String query = selectSQL + " WHERE oeuvre.date_sortie>=? AND oeuvre.date_sortie<?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, begin);
+			preparedStatement.setString(2, end);
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				ArrayList<String> supports = getSupports(id);
+				oeuvres.add(this.fetch(rs, supports));
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return oeuvres;
+	}
+
 }

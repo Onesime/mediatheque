@@ -29,11 +29,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import model.DAOOeuvre;
-import model.Oeuvre;
-import model.Command;
-import model.DAOCategorie;
-import model.DAOGenre;
+import model.*;
 
 import java.util.ArrayList;
 
@@ -56,8 +52,20 @@ public class RechercheAvanceeController extends Pagination implements Initializa
   ListView listViewGenre;
 	public /*static final*/ ObservableList genres = FXCollections.observableArrayList();
 
-	/// Container
-	@FXML private TilePane content;
+	/// Recherche by note
+	@FXML
+	Button btnSearchByNote;
+	@FXML
+	ListView listViewNote;
+	public /*static final*/ ObservableList notes = FXCollections.observableArrayList();
+
+	/// Recherche by date
+	@FXML
+	Button btnSearchByDate;
+	@FXML
+	TextField inputBegin;
+	@FXML
+	TextField inputEnd;
 
   public RechercheAvanceeController() {
 		/// Recherche by categorie
@@ -67,12 +75,19 @@ public class RechercheAvanceeController extends Pagination implements Initializa
 		/// Recherche by genre
 		this.btnSearchByGenre = new Button();
 		this.listViewGenre = new ListView();
+
+	  /// Recherche by note
+	  this.btnSearchByNote = new Button();
+	  this.listViewNote = new ListView();
+
+	  /// date
+	  this.inputBegin = new TextField();
+	  this.inputEnd = new TextField();
   }
 
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("RechercheAvanceeController::initialize");
 
 		/// Feed cats
 		cats.addAll(new DAOCategorie().findAllString());
@@ -81,11 +96,16 @@ public class RechercheAvanceeController extends Pagination implements Initializa
 		/// Feed genres
 		genres.addAll(new DAOGenre().findAllString());
 		listViewGenre.setItems(genres);
+
+	  /// Feed notes
+	  notes.addAll("0", "1", "3", "4", "5");
+	  listViewNote.setItems(notes);
+
+
   }
 
 	@FXML
 	private void actionSearchByCat(ActionEvent event) throws IOException {
-		System.out.println("RechercheAvanceeController::actionSearchByCat");
 		String cat = this.listViewCat.getSelectionModel().getSelectedItem().toString();
 		System.out.println(cat);
 
@@ -104,7 +124,6 @@ public class RechercheAvanceeController extends Pagination implements Initializa
 
 	@FXML
 	private void actionSearchByGenre(ActionEvent event) throws IOException {
-		System.out.println("RechercheAvanceeController::actionSearchByGenre");
 		String genre = this.listViewGenre.getSelectionModel().getSelectedItem().toString();
 		System.out.println(genre);
 
@@ -120,6 +139,43 @@ public class RechercheAvanceeController extends Pagination implements Initializa
 		this.changeContent(btnSearchByCat, "/listOeuvres.fxml");
 		//this.changeScene(btnSearchByCat, "/pAccueil.fxml");
   }
+
+	@FXML
+	private void actionSearchByNote(ActionEvent event) throws IOException {
+
+		int note = Integer.valueOf(this.listViewNote.getSelectionModel().getSelectedItem().toString());
+		System.out.println(note);
+
+		/// Set la Command
+		ListOeuvresController.setNextSearch(new Command<ArrayList<Oeuvre>>() {
+			int noteB = note;
+			public ArrayList<Oeuvre> get() {
+				return new DAOOeuvre().getAllOeuvreByNote(note);
+			}
+		});
+
+		/// Switch scene
+		this.changeContent(btnSearchByNote, "/listOeuvres.fxml");
+		//this.changeScene(btnSearchByCat, "/pAccueil.fxml");
+	}
+
+	@FXML
+	private void actionSearchByDate(ActionEvent event) throws IOException {
+
+		/// Set la Command
+		ListOeuvresController.setNextSearch(new Command<ArrayList<Oeuvre>>() {
+			String begin = inputBegin.getText();
+			String end = inputEnd.getText();
+			public ArrayList<Oeuvre> get() {
+				System.out.println(begin + " " + end);
+				return new DAOOeuvre().getAllOeuvreByDate(begin, end);
+			}
+		});
+
+		/// Switch scene
+		this.changeContent(btnSearchByNote, "/listOeuvres.fxml");
+		//this.changeScene(btnSearchByCat, "/pAccueil.fxml");
+	}
 }
 
 
