@@ -1,9 +1,11 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -11,6 +13,7 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 import javafx.application.Platform;
@@ -38,13 +41,13 @@ import model.DAOGenre;
 
 import java.util.ArrayList;
 
-import javafx.scene.control.ListView;
+import javafx.scene.control.ChoiceBox;
 
 public class AddOeuvreController extends Pagination implements Initializable {
 	/// Inputs
 	@FXML TextField titreInput;
 
-	@FXML ListView listViewCat;
+	@FXML ChoiceBox listViewCat;
 	public /*static final*/ ObservableList cats = FXCollections.observableArrayList();
 
 	@FXML TextField dateAcquisitionInput;
@@ -59,6 +62,7 @@ public class AddOeuvreController extends Pagination implements Initializable {
 	@FXML TextField plateformeInput;
 	/// submit
 	Button valider;
+	@FXML Label labelPlateforme;
 	
   public AddOeuvreController() {
 		System.out.println("AddOeuvreController::DialogControlleur");
@@ -77,7 +81,9 @@ public class AddOeuvreController extends Pagination implements Initializable {
 
 		this.valider = new Button();
 
-		this.listViewCat = new ListView();
+		this.listViewCat = new ChoiceBox();
+
+		this.labelPlateforme = new Label();
   }
 
   @Override
@@ -86,7 +92,22 @@ public class AddOeuvreController extends Pagination implements Initializable {
 		/// Feed cats
 		cats.addAll(new DAOCategorie().findAllString());
 		listViewCat.setItems(cats);
+		listViewCat.setValue(cats.get(0));
+		plateformeInput.setVisible(false);
+
   }
+
+	@FXML
+	private void handleCatSelection(Event event) throws IOException {
+		System.out.println(listViewCat.getSelectionModel().getSelectedItem().toString());
+		if (listViewCat.getSelectionModel().getSelectedItem().toString().equals("jeux_video")) {
+			plateformeInput.setVisible(true);
+			labelPlateforme.setVisible(true);
+		} else {
+			plateformeInput.setVisible(false);
+			labelPlateforme.setVisible(false);
+		}
+	}
 
 	@FXML
 	private void submitOeuvre(ActionEvent event) throws IOException {
