@@ -74,7 +74,7 @@ public class MainController extends Pagination implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 		try {
-			this.changeContent(content, "/pAccueil.fxml");
+			this.changeContent(content, "/listOeuvres.fxml");
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
