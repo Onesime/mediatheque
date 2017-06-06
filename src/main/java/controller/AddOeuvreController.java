@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.beans.value.ChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.scene.control.Button;
@@ -97,26 +98,21 @@ public class AddOeuvreController extends Pagination implements Initializable {
 		plateformeInput.setVisible(false);
 
 		/// addd
+
 		listViewCat.getSelectionModel().selectedItemProperty().addListener( 
 			new ChangeListener<String>() {
 				@Override
-      	public void changed(ObservableValue observableValue, String number, String number2) {
-        	System.out.println(box.getItems().get((Integer) number2));
-      	}
+				public void changed(ObservableValue observableValue, String oldValue, String newValue) {
+					if (newValue.equals("jeux_video")) {
+						plateformeInput.setVisible(true);
+						labelPlateforme.setVisible(true);
+					} else {
+						plateformeInput.setVisible(false);
+						labelPlateforme.setVisible(false);
+					}
+				}
 			});
-  }
-
-	@FXML
-	private void handleCatSelection(Event event) throws IOException {
-		System.out.println(listViewCat.getSelectionModel().getSelectedItem().toString());
-		if (listViewCat.getSelectionModel().getSelectedItem().toString().equals("jeux_video")) {
-			plateformeInput.setVisible(true);
-			labelPlateforme.setVisible(true);
-		} else {
-			plateformeInput.setVisible(false);
-			labelPlateforme.setVisible(false);
-		}
-	}
+  	}
 
 	@FXML
 	private void submitOeuvre(ActionEvent event) throws IOException {
