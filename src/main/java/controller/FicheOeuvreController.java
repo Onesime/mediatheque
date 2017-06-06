@@ -73,9 +73,9 @@ public class FicheOeuvreController extends Pagination implements Initializable {
         commentO.setText(oeuvre.getComment());
         noteO.setText(Integer.toString(oeuvre.getNote()));
 
-        if (oeuvre.getCat() == "album") {
+       /* if (oeuvre.getCat() == "album") {
             System.out.println("ID invalide");
-            return;
+            return;*/
         /*SupportO.setCellValueFactory(new PropertyValueFactory<>("support"));
         PlateformeO.setCellValueFactory(new PropertyValueFactory<>("plateforme"));*/
 

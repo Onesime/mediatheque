@@ -74,7 +74,7 @@ public class MainController extends Pagination implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 		try {
-			this.changeContent(content, "/listOeuvres.fxml");
+			this.changeContent(content, "/pAccueil.fxml");
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -129,6 +129,7 @@ public class MainController extends Pagination implements Initializable {
 	@FXML private AddOeuvreController addOeuvreController;
 	@FXML private ListOeuvresController listOeuvresController;
 	@FXML private RechercheAvanceeController rechercheAvanceeController;
+	@FXML private FicheOeuvreController ficheOeuvreController;
 
 }
 
