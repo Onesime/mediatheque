@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import java.net.URL;
@@ -84,21 +86,40 @@ public class ListOeuvresController extends Pagination implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("ListOeuvresController::initialize");
-    titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-    catColumn.setCellValueFactory(new PropertyValueFactory<>("cat"));
-    authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
-    genreColumn.setCellValueFactory(new PropertyValueFactory<>("Genre"));
-    langColumn.setCellValueFactory(new PropertyValueFactory<>("langue"));
-    originColumn.setCellValueFactory(new PropertyValueFactory<>("origine"));
-    acqDateColumn.setCellValueFactory(new PropertyValueFactory<>("date_acquisition"));
-    outDateColumn.setCellValueFactory(new PropertyValueFactory<>("date_sortie"));
-    commentColumn.setCellValueFactory(new PropertyValueFactory<>("comment"));
-    noteColumn.setCellValueFactory(new PropertyValueFactory<>("note"));
+      titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+      catColumn.setCellValueFactory(new PropertyValueFactory<>("cat"));
+      authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
+      genreColumn.setCellValueFactory(new PropertyValueFactory<>("Genre"));
+      langColumn.setCellValueFactory(new PropertyValueFactory<>("langue"));
+      originColumn.setCellValueFactory(new PropertyValueFactory<>("origine"));
+      acqDateColumn.setCellValueFactory(new PropertyValueFactory<>("date_acquisition"));
+      outDateColumn.setCellValueFactory(new PropertyValueFactory<>("date_sortie"));
+      commentColumn.setCellValueFactory(new PropertyValueFactory<>("comment"));
+      noteColumn.setCellValueFactory(new PropertyValueFactory<>("note"));
 
-		/// Feed the data
-    oeuvresTable.getItems().addAll(nextSearch.get());
+      oeuvresTable.getItems().addAll(nextSearch.get());
+
+//      oeuvresTable.setOnMouseClicked(clickRawTable());
   }
+
+      @FXML
+      public void clickRawTable(Event event)throws IOException
+      {
+          System.out.println("toto");
+          System.out.println(oeuvresTable.getSelectionModel().getSelectedItem().getTitle());
+          FicheOeuvreController.setIdOeuvre(oeuvresTable.getSelectionModel().getSelectedItem().getId());
+          this.changeContent(oeuvresTable, "/ficheOeuvre.fxml");
+          //if (event.getClickCount() == 2) //Checking double click
+          //{
+              System.out.println(oeuvresTable.getSelectionModel().getSelectedItem().getTitle());
+//              System.out.println(tableID.getSelectionModel().getSelectedItem().getCat());
+//              System.out.println(tableID.getSelectionModel().getSelectedItem().getAuthor());
+//              System.out.println(tableID.getSelectionModel().getSelectedItem().getAuthor());
+//              System.out.println(tableID.getSelectionModel().getSelectedItem().getAuthor());
+//              System.out.println(tableID.getSelectionModel().getSelectedItem().getAuthor());
+//              System.out.println(tableID.getSelectionModel().getSelectedItem().getAuthor());
+          //}
+      }
 }
 
 

@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
@@ -37,10 +38,9 @@ public class Pagination {
 		tilePane.getChildren().add(FXMLLoader.load(getClass().getResource(page)));
 	}
 
-	/// change le content
 	@FXML
-	public void changeContent(Button button, String page) throws IOException {
-		TilePane tilePane = (TilePane)button.getScene().lookup("#content");
+	public void changeContent(Node node, String page) throws IOException {
+		TilePane tilePane = (TilePane)node.getScene().lookup("#content");
 		tilePane.getChildren().clear();
 		tilePane.getChildren().add(FXMLLoader.load(getClass().getResource(page)));
 	}
