@@ -42,6 +42,7 @@ import model.DAOGenre;
 import java.util.ArrayList;
 
 import javafx.scene.control.ChoiceBox;
+import javafx.beans.value.ObservableValue;
 
 public class AddOeuvreController extends Pagination implements Initializable {
 	/// Inputs
@@ -95,6 +96,14 @@ public class AddOeuvreController extends Pagination implements Initializable {
 		listViewCat.setValue(cats.get(0));
 		plateformeInput.setVisible(false);
 
+		/// addd
+		listViewCat.getSelectionModel().selectedItemProperty().addListener( 
+			new ChangeListener<String>() {
+				@Override
+      	public void changed(ObservableValue observableValue, String number, String number2) {
+        	System.out.println(box.getItems().get((Integer) number2));
+      	}
+			});
   }
 
 	@FXML
