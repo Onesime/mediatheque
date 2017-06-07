@@ -1,13 +1,16 @@
 package controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.DAOCategorie;
 import model.Oeuvre;
 import model.DAOOeuvre;
 import model.Command;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -50,6 +53,9 @@ public class FicheOeuvreController extends Pagination implements Initializable {
     @FXML
     private Label plateformeO = new Label();
 
+    @FXML
+    Button modButton;
+
     public FicheOeuvreController() {
 
 
@@ -67,7 +73,7 @@ public class FicheOeuvreController extends Pagination implements Initializable {
         auteurO.setText(oeuvre.getAuthor());
         genreO.setText(oeuvre.getGenre());
         langueO.setText(oeuvre.getLangue());
-        origineO.setText(oeuvre.getTitle());
+        origineO.setText(oeuvre.getOrigine());
         acqO.setText(oeuvre.getStringDate_acquisition());
         sortieO.setText(oeuvre.getStringDate_sortie());
         commentO.setText(oeuvre.getComment());
@@ -82,6 +88,9 @@ public class FicheOeuvreController extends Pagination implements Initializable {
 
     }
 
+    public void ModAction(ActionEvent event) throws IOException {
+        this.changeScene(modButton, "/modOeuvre.fxml");
+    }
     /// Feed the data
         //Oeuvre.getItems().addOeuvre(nextSearch.get());
 
