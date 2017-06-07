@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane hbarPolicy="ALWAYS" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="400.0" prefWidth="800.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddOeuvreController">
+<ScrollPane hbarPolicy="ALWAYS" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddOeuvreController">
    <content>
-      <HBox prefWidth="800.0" BorderPane.alignment="CENTER">
+      <HBox prefWidth="900.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefWidth="600.0">
+            <VBox prefWidth="450.0">
                <children>
                   <Label text="Titre">
                      <VBox.margin>
@@ -165,7 +165,7 @@
                   </Button>
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="600.0">
+            <VBox fx:id="showMorceau" prefHeight="200.0" prefWidth="450.0" visible="false">
                <children>
                   <Label text="Morceau">
                      <VBox.margin>
@@ -193,16 +193,24 @@
                         <Insets left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>
                   </Button>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView>
                     <columns>
-                      <TableColumn prefWidth="197.0" text="Morceau" />
-                      <TableColumn minWidth="0.0" prefWidth="168.0" text="Durée" />
+                      <TableColumn prefWidth="201.0" text="Morceau" />
+                      <TableColumn minWidth="0.0" prefWidth="197.0" text="Durée" />
                     </columns>
                      <VBox.margin>
-                        <Insets top="10.0" />
+                        <Insets left="20.0" right="20.0" top="20.0" />
                      </VBox.margin>
                   </TableView>
+                  <Button mnemonicParsing="false" text="Supprimer morceau">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="20.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
             </VBox>
          </children>
       </HBox>

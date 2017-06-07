@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -63,12 +64,14 @@ public class AddOeuvreController extends Pagination implements Initializable {
 	@FXML TextArea commentInput;
 	@FXML TextField plateformeInput;
 	/// submit
-	Button valider;
+	@FXML Button valider;
 	@FXML Label labelPlateforme;
-	
+
+	@FXML VBox showMorceau;
+
   public AddOeuvreController() {
 		System.out.println("AddOeuvreController::DialogControlleur");
-		
+
 		this.titreInput = new TextField();
 		this.dateAcquisitionInput = new TextField();
 		this.dateSortieInput = new TextField();
@@ -86,6 +89,8 @@ public class AddOeuvreController extends Pagination implements Initializable {
 		this.listViewCat = new ChoiceBox();
 
 		this.labelPlateforme = new Label();
+
+		this.showMorceau = new VBox();
   }
 
   @Override
@@ -97,18 +102,22 @@ public class AddOeuvreController extends Pagination implements Initializable {
 		listViewCat.setValue(cats.get(0));
 		plateformeInput.setVisible(false);
 
-		/// addd
+		/// add
 
-		listViewCat.getSelectionModel().selectedItemProperty().addListener( 
+		listViewCat.getSelectionModel().selectedItemProperty().addListener(
 			new ChangeListener<String>() {
 				@Override
 				public void changed(ObservableValue observableValue, String oldValue, String newValue) {
 					if (newValue.equals("jeux_video")) {
 						plateformeInput.setVisible(true);
 						labelPlateforme.setVisible(true);
+
+					} else if (newValue.equals("album")) {
+						showMorceau.setVisible(true);
 					} else {
 						plateformeInput.setVisible(false);
 						labelPlateforme.setVisible(false);
+						showMorceau.setVisible(false);
 					}
 				}
 			});
@@ -147,6 +156,7 @@ public class AddOeuvreController extends Pagination implements Initializable {
 			this.commentInput.getText(),
 			Integer.parseInt(this.noteInput.getText()),
 			supports);
+
 
 		System.out.println("AddOeuvreController::actionClick:oeuvre_made");
 		System.out.println(oeuvre.getStringDate_acquisition());
