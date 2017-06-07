@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane hbarPolicy="ALWAYS" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="600.0" prefWidth="900.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FicheOeuvreController">
+<ScrollPane hbarPolicy="ALWAYS" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="600.0" prefWidth="900.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FicheOeuvreController">
    <content>
       <HBox BorderPane.alignment="CENTER">
          <children>
@@ -134,7 +134,7 @@
                         <Insets left="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Region prefHeight="61.0" prefWidth="450.0" />
+                  <Region prefHeight="30.0" prefWidth="450.0" />
                   <HBox prefHeight="40.0" prefWidth="450.0">
                      <children>
                         <Button fx:id="modButton" mnemonicParsing="false" onAction="#ModAction" text="Modifier">

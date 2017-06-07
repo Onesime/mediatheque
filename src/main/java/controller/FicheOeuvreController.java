@@ -17,9 +17,7 @@ import java.util.ResourceBundle;
 import javafx.scene.control.Label;
 
 
-/**
- * Created by Jordan TROADEC on 06/06/2017.
- */
+
 public class FicheOeuvreController extends Pagination implements Initializable {
 
     private static int idOeuvre = 1;
@@ -89,6 +87,7 @@ public class FicheOeuvreController extends Pagination implements Initializable {
     }
 
     public void ModAction(ActionEvent event) throws IOException {
+        ModOeuvreController.setIdOeuvre(idOeuvre);
         this.changeScene(modButton, "/modOeuvre.fxml");
     }
     /// Feed the data
