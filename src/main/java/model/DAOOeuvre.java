@@ -57,7 +57,8 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 				resultSet.getString("date_sortie"),
 				resultSet.getString("comment"),
 				resultSet.getInt("note"),
-				supports);
+				supports,
+				resultSet.getString("plateforme.name"));
 	}
 
 	@Override

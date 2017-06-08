@@ -99,8 +99,13 @@ public class FicheOeuvreController extends Pagination implements Initializable {
         sortieO.setText(oeuvre.getStringDate_sortie());
         commentO.setText(oeuvre.getComment());
         noteO.setText(Integer.toString(oeuvre.getNote()));
-
-				this.listMorceauxController.initialize(morceauxTable, nameColumn, dureeColumn);
+        if(oeuvre.getSupports().isEmpty()) {
+            supportO.setText("");
+        } else {
+            supportO.setText(oeuvre.getSupports().get(0));
+        }
+        plateformeO.setText(oeuvre.getPlateforme());
+        this.listMorceauxController.initialize(morceauxTable, nameColumn, dureeColumn);
 
     }
 

@@ -154,7 +154,8 @@ public class AddOeuvreController extends Pagination implements Initializable {
 			this.dateSortieInput.getText(),
 			this.commentInput.getText(),
 			Integer.parseInt(this.noteInput.getText()),
-			supports);
+			supports,
+				plateformeInput.getText());
 
 
 		System.out.println("AddOeuvreController::actionClick:oeuvre_made");

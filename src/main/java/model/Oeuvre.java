@@ -28,7 +28,7 @@ public class Oeuvre {
 
   public Oeuvre(int id, String title, String cat, String author, String genre,
 		String langue, String origine, String date_acquisition, String date_sortie, 
-		String comment, int note, ArrayList<String> supports) {
+		String comment, int note, ArrayList<String> supports, String plateforme) {
       this.id = new SimpleIntegerProperty(id);
       this.title = new SimpleStringProperty(title);
       this.cat = new SimpleStringProperty(cat);
@@ -47,7 +47,7 @@ public class Oeuvre {
       this.note = new SimpleIntegerProperty(note);
       this.supports = supports;
 
-			this.plateforme = new SimpleStringProperty("");
+			this.plateforme = new SimpleStringProperty(plateforme);
   }
 
 	
@@ -193,4 +193,10 @@ public class Oeuvre {
       return plateforme;
   }
 
+    public void addSupports(String comment) {
+        this.supports.add(comment);
+    }
+    public ArrayList<String> getSupports() {
+        return supports;
+    }
 }
