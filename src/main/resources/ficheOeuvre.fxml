@@ -213,10 +213,10 @@
                         <Insets left="20.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TableView prefHeight="200.0" prefWidth="200.0">
+                  <TableView fx:id="morceauxTable" prefHeight="200.0" prefWidth="200.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Morceau" />
-                      <TableColumn prefWidth="75.0" text="Durée" />
+                      <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Morceau" />
+                      <TableColumn fx:id="dureeColumn" prefWidth="75.0" text="Durée" />
                     </columns>
                      <VBox.margin>
                         <Insets top="10.0" />

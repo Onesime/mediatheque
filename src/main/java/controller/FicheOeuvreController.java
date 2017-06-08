@@ -5,10 +5,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
+
 import model.DAOCategorie;
 import model.Oeuvre;
 import model.DAOOeuvre;
 import model.Command;
+import model.Morceau;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,6 +21,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
+import javafx.scene.control.TableColumn;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
+
+import java.sql.Time;
 
 public class FicheOeuvreController extends Pagination implements Initializable {
 
@@ -56,10 +64,23 @@ public class FicheOeuvreController extends Pagination implements Initializable {
     @FXML
     Button modButton;
 
+		/// Table
+		@FXML
+		private TableView<Morceau> morceauxTable;
+		@FXML
+		private TableColumn<Morceau, String> nameColumn;
+		@FXML
+		private TableColumn<Morceau, Time> dureeColumn;
+
+
 		private Oeuvre oeuvre;
+
+		@FXML
+		private ListMorceauxController listMorceauxController;
 
     public FicheOeuvreController() {
 			oeuvre = new DAOOeuvre().find(idOeuvre);
+			listMorceauxController = new ListMorceauxController(oeuvre);
     }
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,6 +99,8 @@ public class FicheOeuvreController extends Pagination implements Initializable {
         sortieO.setText(oeuvre.getStringDate_sortie());
         commentO.setText(oeuvre.getComment());
         noteO.setText(Integer.toString(oeuvre.getNote()));
+
+				this.listMorceauxController.initialize(morceauxTable, nameColumn, dureeColumn);
 
     }
 
