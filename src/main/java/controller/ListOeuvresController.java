@@ -98,20 +98,15 @@ public class ListOeuvresController extends Pagination implements Initializable {
       noteColumn.setCellValueFactory(new PropertyValueFactory<>("note"));
 
       oeuvresTable.getItems().addAll(nextSearch.get());
-
-//      oeuvresTable.setOnMouseClicked(clickRawTable());
   }
 
       @FXML
       public void clickRawTable(Event event)throws IOException
       {
-          System.out.println("toto");
-          System.out.println(oeuvresTable.getSelectionModel().getSelectedItem().getTitle());
           FicheOeuvreController.setIdOeuvre(oeuvresTable.getSelectionModel().getSelectedItem().getId());
           this.changeContent(oeuvresTable, "/ficheOeuvre.fxml");
           //if (event.getClickCount() == 2) //Checking double click
           //{
-              System.out.println(oeuvresTable.getSelectionModel().getSelectedItem().getTitle());
 //              System.out.println(tableID.getSelectionModel().getSelectedItem().getCat());
 //              System.out.println(tableID.getSelectionModel().getSelectedItem().getAuthor());
 //              System.out.println(tableID.getSelectionModel().getSelectedItem().getAuthor());

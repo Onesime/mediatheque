@@ -16,6 +16,8 @@ import java.util.ResourceBundle;
 
 import javafx.scene.control.Label;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 
 public class FicheOeuvreController extends Pagination implements Initializable {
@@ -54,13 +56,13 @@ public class FicheOeuvreController extends Pagination implements Initializable {
     @FXML
     Button modButton;
 
+		private Oeuvre oeuvre;
+
     public FicheOeuvreController() {
-
-
+			oeuvre = new DAOOeuvre().find(idOeuvre);
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-        Oeuvre oeuvre = new DAOOeuvre().find(idOeuvre);
         if (oeuvre == null) {
             System.out.println("ID invalide");
             return;
@@ -77,21 +79,27 @@ public class FicheOeuvreController extends Pagination implements Initializable {
         commentO.setText(oeuvre.getComment());
         noteO.setText(Integer.toString(oeuvre.getNote()));
 
-       /* if (oeuvre.getCat() == "album") {
-            System.out.println("ID invalide");
-            return;*/
-        /*SupportO.setCellValueFactory(new PropertyValueFactory<>("support"));
-        PlateformeO.setCellValueFactory(new PropertyValueFactory<>("plateforme"));*/
-
-
     }
 
     public void ModAction(ActionEvent event) throws IOException {
         ModOeuvreController.setIdOeuvre(idOeuvre);
-        this.changeScene(modButton, "/modOeuvre.fxml");
+        this.changeContent(modButton, "/modOeuvre.fxml");
     }
-    /// Feed the data
-        //Oeuvre.getItems().addOeuvre(nextSearch.get());
+   
+
+		/// Delete
+		@FXML
+    Button btnSupprimer = new Button();
+		public void deleteOeuvre(ActionEvent event) throws IOException {
+			new DAOOeuvre().delete(oeuvre);
+			Alert dialog = new Alert(
+				Alert.AlertType.CONFIRMATION,
+				"L'oeuvre " + oeuvre.getTitle() + ", id:" + oeuvre.getId() + " a bien était suppprimer.");
+			dialog.showAndWait()
+				.filter(response -> response.equals(ButtonType.OK))
+				.ifPresent(response -> System.out.println("ok"));
+			this.changeContent(btnSupprimer, "/listOeuvres.fxml");
+		}
 
 
 }

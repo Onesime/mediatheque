@@ -95,7 +95,6 @@ public class AddOeuvreController extends Pagination implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("AddOeuvreController::initialize");
 		/// Feed cats
 		cats.addAll(new DAOCategorie().findAllString());
 		listViewCat.setItems(cats);

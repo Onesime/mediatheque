@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane hbarPolicy="ALWAYS" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="600.0" prefWidth="900.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FicheOeuvreController">
+<ScrollPane hbarPolicy="ALWAYS" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="600.0" prefWidth="900.0" vbarPolicy="ALWAYS" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FicheOeuvreController">
    <content>
       <HBox BorderPane.alignment="CENTER">
          <children>
@@ -142,7 +142,7 @@
                               <Insets left="20.0" />
                            </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" text="Supprimer">
+                        <Button fx:id="btnSupprimer" mnemonicParsing="false" onAction="#deleteOeuvre" text="Supprimer">
                            <HBox.margin>
                               <Insets left="20.0" />
                            </HBox.margin>
