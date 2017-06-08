@@ -163,7 +163,7 @@
                         <Insets left="20.0" right="20.0" />
                      </VBox.margin>
                      <children>
-            						<Button fx:id="btnValider" text="Valider" />
+            						<Button fx:id="btnValider" onAction="#modifyOeuvre" text="Valider" />
                         <Button fx:id="btnSupprimer" mnemonicParsing="false" onAction="#deleteOeuvre" text="Supprimer">
                            <HBox.margin>
                               <Insets left="20.0" />

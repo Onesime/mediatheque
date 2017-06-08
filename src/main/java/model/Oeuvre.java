@@ -24,6 +24,8 @@ public class Oeuvre {
   private final IntegerProperty note;
   private final ArrayList<String> supports;
 
+	private final StringProperty plateforme;
+
   public Oeuvre(int id, String title, String cat, String author, String genre,
 		String langue, String origine, String date_acquisition, String date_sortie, 
 		String comment, int note, ArrayList<String> supports) {
@@ -44,6 +46,8 @@ public class Oeuvre {
       this.comment = new SimpleStringProperty(comment);
       this.note = new SimpleIntegerProperty(note);
       this.supports = supports;
+
+			this.plateforme = new SimpleStringProperty("");
   }
 
 	
@@ -133,6 +137,9 @@ public class Oeuvre {
   public void setDate_acquisition(LocalDate date_acquisition) {
       this.date_acquisition.set(date_acquisition);
   }
+	public void setDate_acquisition(String date_acquisition) {
+      this.date_acquisition.set(LocalDate.parse(date_acquisition, formatter));
+  }
   public ObjectProperty<LocalDate> date_acquisitionProperty() {
       return date_acquisition;
   }
@@ -146,6 +153,9 @@ public class Oeuvre {
   }
   public void setDate_sortie(LocalDate date_sortie) {
       this.date_sortie.set(date_sortie);
+  }
+	public void setDate_sortie(String date_sortie) {
+      this.date_sortie.set(LocalDate.parse(date_sortie, formatter));
   }
   public ObjectProperty<LocalDate> date_sortieProperty() {
       return date_sortie;
@@ -171,6 +181,16 @@ public class Oeuvre {
   }
   public IntegerProperty noteProperty() {
       return note;
+  }
+
+	public String getPlateforme() {
+      return plateforme.get();
+  }
+  public void setPlateforme(String plateforme) {
+      this.plateforme.set(plateforme);
+  }
+  public StringProperty plateformeProperty() {
+      return plateforme;
   }
 
 }

@@ -35,7 +35,7 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 			"VALUES (?,?,?,?,?)";// +
 			//"INSERT INTO genre (genre.name) VALUES ('rdtfyugih')";
 
-	static String updateSQL = "UPDATE oeuvre SET titre=?, note=?, comment=?, categorie_id=?, genre_id=? WHERE id=?";
+	static String updateSQL = "UPDATE oeuvre SET titre=?, date_acquisition=?, date_sortie=?, note=?, comment=? WHERE id=?";
 
 
 
@@ -175,19 +175,24 @@ public class DAOOeuvre implements IDao<Oeuvre>{
 	public void update(Oeuvre oeuvre){
 		try	{
 			PreparedStatement preparedStatement = connection.prepareStatement(updateSQL);
-			preparedStatement.setString(1, oeuvre.getTitle());
-			preparedStatement.setInt(2, oeuvre.getNote());
-			preparedStatement.setString(3, oeuvre.getComment());
 
-			preparedStatement.setString(4, oeuvre.getGenre());
-			preparedStatement.setString(5, oeuvre.getCat());
+			preparedStatement.setString(1, oeuvre.getTitle());
+			preparedStatement.setString(2, oeuvre.getStringDate_acquisition());
+			preparedStatement.setString(3, oeuvre.getStringDate_sortie());
+			preparedStatement.setInt(4, oeuvre.getNote());
+			preparedStatement.setString(5, oeuvre.getComment());
 
 			preparedStatement.setInt(6, oeuvre.getId());
 
 			/// result
 			preparedStatement.executeUpdate();
 
-			//Oeuvre oeuvre = new Oeuvre();
+			this.updateForeignKey(oeuvre.getId(), "auteur", oeuvre.getAuthor());
+			this.updateForeignKey(oeuvre.getId(), "categorie", oeuvre.getCat());
+			this.updateForeignKey(oeuvre.getId(), "genre", oeuvre.getGenre());
+			this.updateForeignKey(oeuvre.getId(), "langue", oeuvre.getLangue());
+			this.updateForeignKey(oeuvre.getId(), "origine", oeuvre.getOrigine());
+			this.updateForeignKey(oeuvre.getId(), "plateforme", oeuvre.getPlateforme());
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}

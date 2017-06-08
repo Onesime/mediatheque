@@ -170,6 +170,29 @@ public class ModOeuvreController extends Pagination implements Initializable {
 				.ifPresent(response -> System.out.println("ok"));
 			this.changeContent(btnSupprimer, "/listOeuvres.fxml");
 		}
-		
 
+		/// Modifier
+		public void modifyOeuvre(ActionEvent event) throws IOException {
+			oeuvre.setTitle(titreInput.getText());
+			oeuvre.setCat(listViewCat.getSelectionModel().getSelectedItem().toString());
+			oeuvre.setDate_acquisition(dateAcquisitionInput.getText());
+			oeuvre.setDate_sortie(dateSortieInput.getText());
+			oeuvre.setAuthor(auteurInput.getText());
+			oeuvre.setGenre(genreInput.getText());
+			oeuvre.setLangue(langueInput.getText());
+			oeuvre.setOrigine(origineInput.getText());
+			//oeuvre.setSupport(supportInput.getText());
+			oeuvre.setNote(Integer.valueOf(noteInput.getText()));
+			oeuvre.setComment(commentInput.getText());
+			oeuvre.setPlateforme(plateformeInput.getText());
+			new DAOOeuvre().update(oeuvre);
+
+			Alert dialog = new Alert(
+				Alert.AlertType.CONFIRMATION,
+				"L'oeuvre " + oeuvre.getTitle() + ", id:" + oeuvre.getId() + " a bien était modifier.");
+			dialog.showAndWait()
+				.filter(response -> response.equals(ButtonType.OK))
+				.ifPresent(response -> System.out.println("ok"));
+			this.changeContent(btnSupprimer, "/ficheOeuvre.fxml");
+		}
 }
